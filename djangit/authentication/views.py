@@ -11,12 +11,13 @@ from django.views import View
 
 
 class SignUp(View):
+    html = 'signupform.html'
+
     def get(self, request):
         form = SignupForm()
-        return render(request, html, {"form": form})
+        return render(request, self.html, {"form": form})
 
     def post(self, request):
-        html = 'signupform.html'
         form = None
         if request.method == "POST":
             form = SignupForm(request.POST)
