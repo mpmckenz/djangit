@@ -9,7 +9,8 @@ class DjangitUser(models.Model):
     password = models.CharField(max_length=30)
     following = models.ManyToManyField(
         'self', related_name='followed_by', symmetrical=False, blank=True)
-    # moderator = models.OneToManyField(Group, on_delete=models.CASCADE, default=)
+    moderator = models.OneToManyField(
+        Group, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.user
