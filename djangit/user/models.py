@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 class DjangitUser(models.Model):
@@ -9,6 +9,7 @@ class DjangitUser(models.Model):
     password = models.CharField(max_length=30)
     following = models.ManyToManyField(
         'self', related_name='followed_by', symmetrical=False, blank=True)
+    # moderator = models.OneToManyField(Group, on_delete=models.CASCADE, default=)
 
     def __str__(self):
         return self.user
