@@ -1,8 +1,8 @@
 from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
-from djangit.post.form import PostForm
-# from .models import Post
-# from djangit.post.helper import toggle_comment_upvotes, sort_comments
+from djangit.post.forms import PostForm
+from .models import Post
+from djangit.post.helper import toggle_comment_upvotes, sort_comments
 from django.views import View
 
 
