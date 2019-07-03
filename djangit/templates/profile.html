@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      ul {
+        list-style: none;
+        margin: 0 2px;
+        padding: 0;
+        display: flex;
+        justify-content: space-around;
+      }
+      a {
+        display: inline;
+      }
+      .button {
+        color: white;
+        background-color: gray;
+        padding: 0.5% 0.8%;
+        cursor: pointer;
+        border-radius: 10px;
+        font-size: 1em;
+        text-decoration: none;
+      }
+      .button:hover {
+        background-color: black;
+      }
+      .card {
+        box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 20%;
+        border-radius: 10px;
+        padding: 2%;
+        background-color: lightcyan;
+      }
+      .card:hover {
+        box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+      }
+      .container {
+        padding: 2px 16px;
+      }
+    </style>
+    {% load static %}
+    <link
+      rel="shortcut icon"
+      href="{% static 'images/favicon.ico' type='image/x-icon' %}"
+    />
+  </head>
+  <body>
+    <ul>
+      <a class="button" href="/">Home</a>
+      <a class="button" href="/compose/">Create Post</a>
+      <a class="button" href="/notifications/"
+        >Notifications: {{ notification_count }}</a
+      >
+      <a class="button" href="/{{ request.user }}/">Settings</a>
+      <a class="button" href="">My Profile</a>
+    </ul>
+    <hr />
+    <div class="card">
+      <div container="container">
+        <h3>
+          <b>{{ user.username }}</b>
+        </h3>
+        <center><h3>Followings:</h3></center>
+        <p>
+          Djangit Users: (HARD-CODED) list user names in hover drop down or
+          sandwich menu
+        </p>
+        <p>
+          Communities: (HARD-CODED) list communities names in hover drop down or
+          sandwich menu
+        </p>
+      </div>
+    </div>
+    <br />
+    <a class="button" href="/logout/">Logout</a>
+    <br />
+    <br />
+    <h1>DEV NOTES for homepage:</h1>
+    <h2>navbar</h2>
+    <p>
+      SORT OPTIONS: 1. vote count 2. ALL posts 3. communities you joined 4.
+      users you follow
+    </p>
+    <p>
+      SEARCH BAR: return results of usernames or community_names that contain
+      search input
+    </p>
+    <p>
+      user to user direct messaging
+    </p>
+    <p>
+      MY PROFILE: 1. posts (shows your posts you wrote) 2. comments (shows your
+      comments on other people posts) 3. upvoted (shows posts of ones you
+      upvoted) 4. downvoted (shows posts of ones you downvoted)
+    </p>
+    <p>
+      create community and become moderator of that community (ability to delete
+      other users posts in your community)
+    </p>
+    <h2>homepage body</h2>
+    <p>posts of followed users and joined communities</p>
+    {% for item in joinedcommunity %} {% for post in followeduser %} {%endfor%}
+    {%endfor%}
+    <h2>post details (see card div below)</h2>
+    <p>
+      note: each post is wrapped in an a tag to make entire div clickable going
+      to post
+    </p>
+    <a href="">
+      <div class="card">
+        <a href="">Community link to all commumity posts</a><br />
+        <a href="">User link to all their posts</a>
+        <p>timestamp here</p>
+        <p>Djangit Title Here</p>
+        <p>Djangit message body here</p>
+        <p>number of comments of this post</p>
+        <p>upvote option</p>
+        <p>(sum of upvotes - downvotes)</p>
+        <p>downvote option</p>
+      </div>
+    </a>
+  </body>
+</html>

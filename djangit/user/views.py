@@ -3,9 +3,9 @@ from django.views import View
 
 from django.shortcuts import render
 
-# Create your views here.
-class Index(View):
+
+class Profile(View):
     def get(self, request):
-        html = 'index.html'
-        
+        html = 'profile.html'
+
         return render(request, html)
