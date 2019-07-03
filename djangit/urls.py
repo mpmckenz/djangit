@@ -19,9 +19,12 @@ from djangit.user.urls import urlpatterns as user_urls
 from djangit.post.urls import urlpatterns as post_urls
 from djangit.notification.urls import urlpatterns as notification_urls
 from djangit.authentication.urls import urlpatterns as authentication_urls
+from djangit.user.views import Homepage
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', Homepage.as_view(), name="homepage")
 ]
 
 urlpatterns += authentication_urls

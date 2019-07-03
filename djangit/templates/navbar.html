@@ -1,0 +1,11 @@
+<html>
+    <head></head>
+    <body>
+
+    {% block nav %}
+    <ul class="nav">
+        <li>{% block nav-home %}<a href="{% url 'homepage' %}">Home</a>{% endblock %}</li>
+    </ul>
+    {% endblock %}
+    </body>
+</html>
