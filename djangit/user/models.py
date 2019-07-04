@@ -11,4 +11,4 @@ class DjangitUser(models.Model):
         'self', related_name='followed_by', symmetrical=False, blank=True)
 
     def __str__(self):
-        return self.user
+        return self.username
