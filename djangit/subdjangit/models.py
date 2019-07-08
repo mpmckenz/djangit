@@ -6,7 +6,7 @@ from djangit.post.models import Post
 
 
 class Subdjangit(models.Model):
-    user = models.OneToOneField(DjangitUser, on_delete=models.CASCADE)
+    # user = models.OneToOneField(DjangitUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=25)
     about = models.CharField(max_length=50, blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
