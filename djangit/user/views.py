@@ -44,3 +44,23 @@ class ViewSpecificUserHomepage(View):
         data = {"specific_user": specific_user,
                 "other_user_posts": other_user_posts}
         return render(request, html, data)
+
+
+class CreateSubdjangit(View):
+    def get(self, request, user):
+        html = "createSubdjangitform.html"
+        if request.user and SubDjangit.objects.all().filter(user=user)
+        request.user.user_permissions.add()
+        return render(request, html)
+
+
+class SubscribeToSubdjangit(View):
+    def get(self, request, subdjangit):
+        subdjangit = DjangitUser.objects.filter(
+            subdjangit=subdjangit).first()
+        if subdjangit not in request.user.subscriptions.get_queryset():
+            request.user.subscriptions.add(subdjangit)
+        else:
+            request.user.following.remove(subdjangit)
+        request.user.save()
+        return redirect("/{}/".format(subdjangit))
