@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 
 
 class DjangitUser(models.Model):
@@ -8,8 +8,9 @@ class DjangitUser(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=30)
     subscriptions = models.ManyToManyField(
-        Subdjangit, symmetrical=False, blank=True)
-    moderator = models.ManyToManyField(Subdjangit, blank=True)
+        'djangit.Subdjangit', symmetrical=False, blank=True, related_name='subscriptions')
+    moderator = models.ManyToManyField(
+        'djangit.Subdjangit', blank=True, related_name='moderator')
 
     def __str__(self):
         return self.username

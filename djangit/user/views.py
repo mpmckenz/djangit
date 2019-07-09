@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 
 from djangit.user.models import DjangitUser
 from djangit.post.models import Post
+from djangit.subdjangit.models import Subdjangit
 
 
 @method_decorator(login_required, name='dispatch')
@@ -44,14 +45,6 @@ class ViewSpecificUserHomepage(View):
         data = {"specific_user": specific_user,
                 "other_user_posts": other_user_posts}
         return render(request, html, data)
-
-
-class CreateSubdjangit(View):
-    def get(self, request, user):
-        html = "createSubdjangitform.html"
-        if request.user and SubDjangit.objects.all().filter(user=user)
-        request.user.user_permissions.add()
-        return render(request, html)
 
 
 class SubscribeToSubdjangit(View):

@@ -9,5 +9,5 @@ admin.site.register(DjangitUser)
 urlpatterns = [
     path('', Homepage.as_view(), name='homepage'),
     path('<str:username>/', ViewSpecificUserHomepage.as_view()),
-    path('<str:subdjangit>/', ViewSpecificSubdjangit.as_view()),
+    # path('<str:subdjangit>/', ViewSpecificSubdjangit.as_view()),
 ]
