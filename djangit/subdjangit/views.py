@@ -24,9 +24,9 @@ class SingleSubdjangit(View):
 
     def get(self, request, title):
         html = "singleSubdjangit.html"
-        subdjangit = Subdjangit.objects.filter(title=title)
-        data = {"subdjangit": subdjangit}
-        return render(request, html, data)
+        subdjangit = Subdjangit.objects.filter(title=title).first()
+        # do as pass in for the count of the subscribers
+        return render(request, html, {"subdjangit": subdjangit})
 
 
 class CreateSubdjangit(View):

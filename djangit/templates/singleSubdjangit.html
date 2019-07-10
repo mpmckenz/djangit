@@ -1,5 +1,9 @@
 <h1>{{ subdjangit.title }}</h1>
 <h1>{{ subdjangit.about }}</h1>
 <h1>{{ subdjangit.created_at }}</h1>
+{% if subdjangit.subscribers == 0 %}
+<h1>There are no subscribers yet :'(</h1>
+{% else %}
 <h1>{{ subdjangit.subscribers }}</h1>
+{% endif %}
 <h1>{{ request.user.username }}</h1>
