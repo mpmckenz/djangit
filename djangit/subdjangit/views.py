@@ -22,9 +22,9 @@ class SubdjangitList(View):
 class SingleSubdjangit(View):
     """View for one subdjangit"""
 
-    def get(self, request, title):
+    def get(self, request, url):
         html = "singleSubdjangit.html"
-        subdjangit = Subdjangit.objects.filter(title=title).first()
+        subdjangit = Subdjangit.objects.filter(url=url).first()
         # do as pass in for the count of the subscribers
         return render(request, html, {"subdjangit": subdjangit})
 
@@ -39,14 +39,17 @@ class CreateSubdjangit(View):
         form = SubdjangitForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            if Subdjangit.objects.filter(title=data['title']):
-                return HttpResponseRedirect(reverse('{}/'.format(data['title'])))
+            if Subdjangit.objects.filter(url=data['url']):
+                return HttpResponseRedirect(reverse('{}/'.format(data['url'])))
             else:
-                Subdjangit.objects.create(
-                    title=data["title"],
-                    about=data["about"],
-                )
-                DjangitUser.objects.add(
-                    moderator=request.user,
-                )
-                return render(request, '/')
+                if " " not in data["url"]:
+                    Subdjangit.objects.create(
+                        title=data["title"],
+                        url=data["url"],
+                        about=data["about"],
+                    )
+                    # get particular djangit user and add manytomany; not req.user
+                    DjangitUser.objects.add(
+                        moderator=request.user,
+                    )
+                    return render(request, '/')
