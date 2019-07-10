@@ -1,50 +1,44 @@
-<<<<<<< HEAD
-from django.shortcuts import render, reverse, HttpResponseRedirect
-from .form import SubdjangitForm
-from djangit.post.form import PostForm
-from djangit.post.models import Post
-=======
 from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
-
->>>>>>> 3a9dfddb703819e4132969454634398316da5aa9
+from djangit.post.form import PostForm
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
 from djangit.user.models import DjangitUser
 from djangit.subdjangit.models import Subdjangit
-<<<<<<< HEAD
-from djangit.subdjangit.form import SubdjangitForm
-=======
 from djangit.subdjangit.forms import SubdjangitForm
->>>>>>> 3a9dfddb703819e4132969454634398316da5aa9
 
-
-class CreateNewSub(View):
+class SubdjangitList(View):
     """View to see all of the subdjangits"""
 
-    form_class = SubdjangitForm
+    form_class = PostForm
 
     def get(self, request):
-        response = {}
+        request = {}
         form = self.form_class()
-        response.update({"form": form})
-        all_subs = DjangitUser.objects.all()
-        response.update({"all_subs": all_subs})
-        return render(request, "./createnewsub.html", response)
+        html = "subdjangit.html"
+        sub = Subdjangit.objects.all().order_by("title")
+        posts = sort_posts(Post.objects.filter(subdangit=sub).all())
+        response.update({"sub": sub, "form": form,
+                        "posts": posts, })
+        return render(request, html, response)
 
     def post(self, request):
         form = self.form_class(request.POST)
-        if form.is_valid() and hasattr(request.user, 'djangituser'):
+        toggle_post_upvotes(request)
+        toggle_post_downvotes(request)
+        if form.is_valid():
             data = form.cleaned_data
-            Subdjangit.objects.create(
-                creator=request.user.subjangit,
-                title=data['title'].replace(" ", ""),
-                about=data['about'],
+            user = DjangitUser.objects.get(pk=request.user.djangituser.pk)
+            Posts.object.create(
+                user = data['user'],
+                title = data['title'],
+                body = data['body'],
+                subdjangit = Subdjangit.objects.filter(title=subdjangit).first()
+
             )
-            return HttpResponseRedirect(reverse("subdjangits"))
-        form = self.form_class()
-        return render(request, "./createnewsub.html", {"form": form})
+        return HttpResponseRedirect(reverse('subdangit', kwargs={"subdjangit": subdjangit}))
 
 
 class SingleSubdjangit(View):
@@ -57,7 +51,12 @@ class SingleSubdjangit(View):
         return render(request, html, {"subdjangit": subdjangit})
 
 
+
+
+
 class CreateSubdjangit(View):
+    """Create a new community"""
+
     def get(self, request):
         html = "createSubdjangitform.html"
         form = SubdjangitForm()
