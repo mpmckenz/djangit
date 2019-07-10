@@ -11,10 +11,10 @@ class Subdjangit(models.Model):
     about = models.CharField(max_length=50, blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     subscribers = models.ManyToManyField(DjangitUser, related_name='subscribers', blank=True)
-    date_created = models.DateTimeField(auto_now_add=True)
+    
 
-    # def __str__(self):
-    #     return self.title
+    def __str__(self):
+        return self.title
 
 # sub.posts.objects.all()
 # creator, title, about, subscribers, date?, subscribe option
