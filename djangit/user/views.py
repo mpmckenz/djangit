@@ -15,10 +15,11 @@ class Homepage(View):
 
     def get(self, request):
         html = 'homepage.html'
-        # logged_in_user_details = DjangitUser.objects.filter(
-        #     username=request.user).first()
 
         all_users = DjangitUser.objects.all()
+        active_user = request.user.djangituser
+        currently_moderatoring = Subdjangit.objects.filter(
+            moderator=active_user)
 
         # sortby_highest_voted_posts = Post.objects.all().order_by('-upvotes')
 
@@ -33,7 +34,8 @@ class Homepage(View):
 
         # data = {'followed_user_posts': followed_user_posts,
         # 'logged_in_user_details': logged_in_user_details, 'list_of_followed_usernames': list_of_followed_usernames}
-        data = {"all_users": all_users}
+        data = {"all_users": all_users,
+                "currently_moderatoring": currently_moderatoring}
         return render(request, html, data)
 
 

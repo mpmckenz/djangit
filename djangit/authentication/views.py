@@ -23,18 +23,19 @@ class SignUp(View):
             form = SignupForm(request.POST)
             if form.is_valid():
                 data = form.cleaned_data
-                user = User.objects.create_user(
-                    username=data["username"],
-                    email=data["email"],
-                    password=data["password"],
-                )
-                user.save()
-                DjangitUser.objects.create(
-                    user=user,
-                    username=data['username']
-                )
-                login(request, user)
-                return HttpResponseRedirect(reverse("homepage"))
+                if " " not in data["username"]:
+                    user = User.objects.create_user(
+                        username=data["username"],
+                        email=data["email"],
+                        password=data["password"],
+                    )
+                    user.save()
+                    DjangitUser.objects.create(
+                        user=user,
+                        username=data['username']
+                    )
+                    login(request, user)
+                    return HttpResponseRedirect(reverse("homepage"))
 
 
 class Login(View):

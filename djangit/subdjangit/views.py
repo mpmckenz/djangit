@@ -30,6 +30,8 @@ class SingleSubdjangit(View):
 
 
 class CreateSubdjangit(View):
+    """Creates a subdjangit or if it already exists, redirects to that subdjangit"""
+
     def get(self, request):
         html = "createSubdjangitform.html"
         form = SubdjangitForm()
@@ -40,13 +42,21 @@ class CreateSubdjangit(View):
         if form.is_valid():
             data = form.cleaned_data
             if Subdjangit.objects.filter(title=data['title']):
-                return HttpResponseRedirect(reverse('{}/'.format(data['title'])))
+                return HttpResponseRedirect('r/{}/'.format(data['title']))
             else:
                 Subdjangit.objects.create(
+                    moderator=request.user.djangituser,
                     title=data["title"],
                     about=data["about"],
                 )
-                DjangitUser.objects.add(
-                    moderator=request.user,
-                )
-                return render(request, '/')
+                return HttpResponseRedirect('/')
+
+
+class DeleteSubdjangit(View):
+    """Deletes subdjangit if logged in user is moderator"""
+
+    def delete(self, request, subdjangit):
+
+        subdjangit = Subdjangit.objects.filter(title=subdjangit)
+        subdjangit.delete()
+        return HttpResponseRedirect('/')
