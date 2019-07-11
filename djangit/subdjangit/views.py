@@ -42,7 +42,7 @@ class CreateSubdjangit(View):
         if form.is_valid():
             data = form.cleaned_data
             if Subdjangit.objects.filter(url=data['url']):
-                return HttpResponseRedirect('r/{}/'.format(data['url']))
+                return HttpResponseRedirect('/r/{}/'.format(data['url']))
             else:
                 if " " not in data['url']:
                     Subdjangit.objects.create(
