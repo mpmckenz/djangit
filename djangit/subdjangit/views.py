@@ -41,7 +41,7 @@ class CreateSubdjangit(View):
     """Creates a subdjangit or if it already exists, redirects to that subdjangit"""
 
     def get(self, request):
-        html = "createSubdjangitform.html"
+        html = "createSubdjangitForm.html"
         form = SubdjangitForm()
         return render(request, html, {'form': form})
 
