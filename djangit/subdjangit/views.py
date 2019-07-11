@@ -16,7 +16,7 @@ class SubdjangitList(View):
     def get(self, request):
         html = "subdjangit.html"
         subdjangits = Subdjangit.objects.all().order_by("title")
-        return render(request, html, {"subdjangits": subdjangits})
+        return render(request, html, {"subdjangits": subdjangits, "form": form})
 
    
 
@@ -50,7 +50,7 @@ class CreateSubdjangit(View):
         if form.is_valid():
             data = form.cleaned_data
             if Subdjangit.objects.filter(url=data['url']):
-                return HttpResponseRedirect('r/{}/'.format(data['url']))
+                return HttpResponseRedirect('/r/{}/'.format(data['url']))
             else:
                 if " " not in data['url']:
                     Subdjangit.objects.create(
