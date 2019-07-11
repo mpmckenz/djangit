@@ -25,8 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-urlpatterns += subdjangit_urls
 urlpatterns += authentication_urls
 urlpatterns += post_urls
 urlpatterns += notification_urls
 urlpatterns += user_urls
+urlpatterns += subdjangit_urls

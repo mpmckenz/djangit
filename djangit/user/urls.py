@@ -8,6 +8,7 @@ admin.site.register(DjangitUser)
 
 urlpatterns = [
     path('', Homepage.as_view(), name='homepage'),
-    path('<str:username>/', ViewSpecificUserHomepage.as_view()),
+    # could add u/ or user/ for users; str in urls; slug; separate endpoints
+    path('user/<str:username>/', ViewSpecificUserHomepage.as_view()),
     # path('<str:subdjangit>/', ViewSpecificSubdjangit.as_view()),
 ]
