@@ -9,8 +9,6 @@ class DjangitUser(models.Model):
     password = models.CharField(max_length=30)
     subscriptions = models.ManyToManyField(
         'djangit.Subdjangit', symmetrical=False, blank=True, related_name='subscriptions')
-    moderator = models.ManyToManyField(
-        'djangit.Subdjangit', blank=True, related_name='moderator')
 
     def __str__(self):
         return self.username
@@ -21,3 +19,5 @@ class DjangitUser(models.Model):
 # 'djangit.change_post'
 
 # check permission
+
+# subscribing filter out spec user and spec subdjangit

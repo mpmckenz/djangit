@@ -24,12 +24,14 @@ class SingleSubdjangit(View):
 
     def get(self, request, url):
         html = "singleSubdjangit.html"
-        subdjangit = Subdjangit.objects.filter(url=url).first()
+        subdjangit = Subdjangit.objects.filter(url=url)
         # do as pass in for the count of the subscribers
         return render(request, html, {"subdjangit": subdjangit})
 
 
 class CreateSubdjangit(View):
+    """Creates a subdjangit or if it already exists, redirects to that subdjangit"""
+
     def get(self, request):
         html = "createSubdjangitform.html"
         form = SubdjangitForm()
@@ -40,16 +42,22 @@ class CreateSubdjangit(View):
         if form.is_valid():
             data = form.cleaned_data
             if Subdjangit.objects.filter(url=data['url']):
-                return HttpResponseRedirect(reverse('{}/'.format(data['url'])))
+                return HttpResponseRedirect('r/{}/'.format(data['url']))
             else:
-                if " " not in data["url"]:
+                if " " not in data['url']:
                     Subdjangit.objects.create(
+                        moderator=request.user.djangituser,
+                        url=data['url'],
                         title=data["title"],
-                        url=data["url"],
                         about=data["about"],
                     )
-                    # get particular djangit user and add manytomany; not req.user
-                    DjangitUser.objects.add(
-                        moderator=request.user,
-                    )
-                    return render(request, '/')
+                    return HttpResponseRedirect('/')
+
+
+class DeleteSubdjangit(View):
+    """Deletes subdjangit if logged in user is moderator"""
+
+    def delete(self, request, subdjangit):
+        subdjangit = Subdjangit.objects.filter(title=subdjangit)
+        subdjangit.delete()
+        return HttpResponseRedirect('/')

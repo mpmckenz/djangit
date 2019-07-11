@@ -2,6 +2,6 @@ from django import forms
 
 
 class SubdjangitForm(forms.Form):
-    title = forms.CharField(max_length=50)
+    title = forms.CharField(max_length=25)
     url = forms.CharField(max_length=50)
-    about = forms.CharField(max_length=75)
+    about = forms.CharField(widget=forms.Textarea)
