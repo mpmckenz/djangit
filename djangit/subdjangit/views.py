@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
 
@@ -18,6 +17,14 @@ class SubdjangitList(View):
         html = "subdjangit.html"
         subdjangits = Subdjangit.objects.all().order_by("title")
         return render(request, html, {"subdjangits": subdjangits})
+
+   
+
+
+
+    #creating the option to post in the community and see all posts that have been made and then 
+    #click on the post which leads to a different template and begins the thread. 
+
 
 
 class SingleSubdjangit(View):
@@ -51,3 +58,31 @@ class CreateSubdjangit(View):
                     moderator=request.user,
                 )
                 return render(request, '/')
+
+
+
+# class CreateSubdjangit(View):
+#    """View to see all of the subdjangits"""
+
+#    form_class = SubdjangitForm
+
+#    def get(self, request):
+#        response = {}
+#        form = self.form_class()
+#        response.update({"form": form})
+#        all_subs = DjangitUser.objects.all()
+#        response.update({"all_subs": all_subs})
+#        return render(request, "./createnewsub.html", response)
+
+#    def post(self, request):
+#        form = self.form_class(request.POST)
+#        if form.is_valid() and hasattr(request.user, 'djangituser'):
+#            data = form.cleaned_data
+#            Subdjangit.objects.create(
+#                creator=request.user.subjangit,
+#                title=data['title'].replace(" ", ""),
+#                about=data['about'],
+#            )
+#            return HttpResponseRedirect(reverse("subdjangits"))
+#        form = self.form_class()
+#        return render(request, "./createnewsub.html", {"form": form})

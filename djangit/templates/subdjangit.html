@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Community Page</title>
+    <!-- no spaces in the url field -->
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Your New Community!!!</h1>
+        <table>
+            <tr>
+                <th>Title</th>
+                <td><a href="/r/{{ subdjangit.title }}/"></a></td>
+            </tr>
+            <tr>
+                <th>About</th>
+                <td><a hreg="/r/{{ subdjangit.about }}"></a></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+<!-- 
+<h1>Subdjangit List</h1>
+
+{% for subdjangit in subdjangits %} 
+<ul>
+    <li><p><a href="/r/{{ subdjangit.title }}/">{{ subdjangit.title }}</a>: {{subdjangit.about}}</p></li>
+</ul>
+{% endfor %} -->
+
