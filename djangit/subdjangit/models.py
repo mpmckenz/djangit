@@ -6,12 +6,13 @@ from djangit.post.models import Post
 
 
 class Subdjangit(models.Model):
-    creater = models.ForeignKey(DjangitUser, on_delete=models.CASCADE, null=True, related_name='creator')
-    title = models.CharField(max_length=25, default='')
-    about = models.CharField(max_length=50, blank=True, null=True)
+    moderator = models.ForeignKey(
+        'djangit.DjangitUser', on_delete=models.CASCADE, related_name='moderator')
+    title = models.CharField(max_length=50)
+    url = models.CharField(max_length=50, default="")
+    about = models.TextField(max_length=75, blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
-    subscribers = models.ManyToManyField(DjangitUser, related_name='subscribers', blank=True)
-    
+    # posts = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

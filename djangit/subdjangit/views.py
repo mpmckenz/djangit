@@ -30,14 +30,16 @@ class SubdjangitList(View):
 class SingleSubdjangit(View):
     """View for one subdjangit"""
 
-    def get(self, request, title):
+    def get(self, request, url):
         html = "singleSubdjangit.html"
-        subdjangit = Subdjangit.objects.filter(title=title).first()
+        subdjangit = Subdjangit.objects.filter(url=url)
         # do as pass in for the count of the subscribers
         return render(request, html, {"subdjangit": subdjangit})
 
 
 class CreateSubdjangit(View):
+    """Creates a subdjangit or if it already exists, redirects to that subdjangit"""
+
     def get(self, request):
         html = "createSubdjangitform.html"
         form = SubdjangitForm()
@@ -47,42 +49,23 @@ class CreateSubdjangit(View):
         form = SubdjangitForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            if Subdjangit.objects.filter(title=data['title']):
-                return HttpResponseRedirect(reverse('{}/'.format(data['title'])))
+            if Subdjangit.objects.filter(url=data['url']):
+                return HttpResponseRedirect('r/{}/'.format(data['url']))
             else:
-                Subdjangit.objects.create(
-                    title=data["title"],
-                    about=data["about"],
-                )
-                DjangitUser.objects.add(
-                    moderator=request.user,
-                )
-                return render(request, '/')
+                if " " not in data['url']:
+                    Subdjangit.objects.create(
+                        moderator=request.user.djangituser,
+                        url=data['url'],
+                        title=data["title"],
+                        about=data["about"],
+                    )
+                    return HttpResponseRedirect('/')
 
 
+class DeleteSubdjangit(View):
+    """Deletes subdjangit if logged in user is moderator"""
 
-# class CreateSubdjangit(View):
-#    """View to see all of the subdjangits"""
-
-#    form_class = SubdjangitForm
-
-#    def get(self, request):
-#        response = {}
-#        form = self.form_class()
-#        response.update({"form": form})
-#        all_subs = DjangitUser.objects.all()
-#        response.update({"all_subs": all_subs})
-#        return render(request, "./createnewsub.html", response)
-
-#    def post(self, request):
-#        form = self.form_class(request.POST)
-#        if form.is_valid() and hasattr(request.user, 'djangituser'):
-#            data = form.cleaned_data
-#            Subdjangit.objects.create(
-#                creator=request.user.subjangit,
-#                title=data['title'].replace(" ", ""),
-#                about=data['about'],
-#            )
-#            return HttpResponseRedirect(reverse("subdjangits"))
-#        form = self.form_class()
-#        return render(request, "./createnewsub.html", {"form": form})
+    def delete(self, request, subdjangit):
+        subdjangit = Subdjangit.objects.filter(title=subdjangit)
+        subdjangit.delete()
+        return HttpResponseRedirect('/')
