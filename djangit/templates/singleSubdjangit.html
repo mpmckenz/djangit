@@ -10,3 +10,11 @@
 {% endif %}
 {% endfor %}
 <h1>{{ request.user.username }}</h1>
+{% block content %}
+<h2>Post in your new Community</h2>
+<form method="POST" class="subpostform" >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-default">Submit</button>
+</form>
+{% endblock %}

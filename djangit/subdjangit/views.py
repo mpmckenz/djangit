@@ -1,6 +1,5 @@
 from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
-
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -16,7 +15,7 @@ class SubdjangitList(View):
     def get(self, request):
         html = "subdjangit.html"
         subdjangits = Subdjangit.objects.all().order_by("title")
-        return render(request, html, {"subdjangits": subdjangits, "form": form})
+        return render(request, html, {"subdjangits": subdjangits})
 
    
 
@@ -35,6 +34,17 @@ class SingleSubdjangit(View):
         subdjangit = Subdjangit.objects.filter(url=url)
         # do as pass in for the count of the subscribers
         return render(request, html, {"subdjangit": subdjangit})
+
+    def post_new(self, request):
+        if request.method == 'POST':
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect('singleSubdjangit.html', pk=post.pk)
+        else:
+            form = PostForm
+        return render(request, "singleSubdangit.html", {'form': form})
+        
 
 
 class CreateSubdjangit(View):
