@@ -38,6 +38,19 @@ class SingleSubdjangit(View):
         html = "singleSubdjangit.html"
         # path_info = request.META.get('PATH_INFO')
         form = PostForm(request.POST)
+        if "upvote" in request.POST:
+            post_thing = request.POST.get("upvote")
+            post = Post.objects.get(url=post_thing)
+            if post.votes.exists(user.id):
+                post.votes.delete(user.id)
+            else:
+                question.votes.up(user.id)
+            return redirect('/r/{}'.format(url))
+        elif "downvote" in request.POST:
+            post_thing = request.POST.get("downvote")
+            post = Post.objects.get(url=post_thing)
+            post.votes.down(user.id)
+            return redirect('/r/{}'.format(url))
         if form.is_valid():
             data = form.cleaned_data
             Post.objects.create(
