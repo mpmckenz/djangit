@@ -52,14 +52,11 @@
       <a class="button" href="">Highest Voted Posts</a>
       <a class="button" href="">Lowest Voted Posts</a>
       <a class="button" href="">Newest Posts</a>
-      <!-- <a class="button" href="">Joined Communities</a> -->
       <a class="button" href="/createsubdjangit/">Create Communtiy</a>
-      <button class="button" id="all_users" href="">
-        All Users
-      </button>
+      <a class="button" href="/allusers">All Users</a>
       <!-- <a class="button" href="/notifications/"
         >Notifications: {{ notification_count }}</a
-      > -->
+        > -->
       <a class="button" href="/subdjangits/">All Subdjangits</a>
       <a class="button" href="/logout/">Sign Out</a>
     </ul>
@@ -71,19 +68,14 @@
         </h3>
         <h3>Followings:</h3>
         <p>
-          Djangit Users: (HARD-CODED) list user names in hover drop down or
-          sandwich menu
+          Joined Subdjangits:{% for community in joined_subdjangits %}
+          {{ community.title }}, {% endfor %}
         </p>
         <p>
-          Your Communities: {% for group in currently_moderatoring %}
+          Your Subdjangits: {% for group in currently_moderatoring %}
           {{ group }}, {%endfor%}
         </p>
       </div>
-    </div>
-    <div class="show_all_users">
-      {% for user in all_users %}
-      <a href="user/{{ user.username }}/"> {{ user.username }} </a><br />
-      {% endfor %}
     </div>
     <br />
     <br />
@@ -100,8 +92,6 @@
     </p>
     <h2>homepage body</h2>
     <p>posts of followed users and joined communities</p>
-    {% for item in joinedcommunity %} {% for post in followeduser %} {%endfor%}
-    {%endfor%}
     <h2>post details (see card div below)</h2>
     <p>
       note: each post is wrapped in an a tag to make entire div clickable ->

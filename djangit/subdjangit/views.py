@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
@@ -7,6 +7,9 @@ from django.utils.decorators import method_decorator
 from djangit.user.models import DjangitUser
 from djangit.subdjangit.models import Subdjangit
 from djangit.subdjangit.forms import SubdjangitForm
+
+from djangit.post.form import PostForm
+from djangit.post.models import Post
 
 
 class SubdjangitList(View):
@@ -30,10 +33,31 @@ class SingleSubdjangit(View):
     """View for one subdjangit"""
 
     def get(self, request, url):
+        form = PostForm()
         html = "singleSubdjangit.html"
         subdjangit = Subdjangit.objects.filter(url=url)
-        # do as pass in for the count of the subscribers
-        return render(request, html, {"subdjangit": subdjangit})
+        subdjangit_posts = Subdjangit.objects.filter(url=url)
+        posts = Post.objects.all().filter(url=url)
+
+        return render(request, html, {"subdjangit": subdjangit, "form": form, "posts": posts})
+
+    def post(self, request, url):
+        html = "singleSubdjangit.html"
+        # path_info = request.META.get('PATH_INFO')
+        form = PostForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            Post.objects.create(
+                user=request.user.djangituser,
+                url='{}'.format(url),
+                title=data['title'],
+                body=data['body'],
+            )
+            subdjangit_posts = Subdjangit.objects.filter(url=url)
+            posts = Post.objects.all()
+            # I want the page to stay on the subdjangit community
+            return redirect('/r/{}'.format(url))
+            # return render(request, '/r/{}'.format(url), {"posts": posts})
 
     def post_new(self, request):
         if request.method == 'POST':
@@ -51,7 +75,7 @@ class CreateSubdjangit(View):
     """Creates a subdjangit or if it already exists, redirects to that subdjangit"""
 
     def get(self, request):
-        html = "createSubdjangitform.html"
+        html = "createSubdjangitForm.html"
         form = SubdjangitForm()
         return render(request, html, {'form': form})
 

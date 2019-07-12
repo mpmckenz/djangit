@@ -1,20 +1,17 @@
 {% for sub in subdjangit %}
 <h1>{{ sub.title }}</h1>
+<h1>Subdjangit moderator: {{ sub.moderator }}</h1>
 <h3>r/{{ sub.url }}</h3>
 <h1>{{ sub.about }}</h1>
 <h1>{{ sub.created_at }}</h1>
-{% if sub.subscribers == 0 %}
-<h1>There are no subscribers yet :'(</h1>
-{% else %}
-<h1>{{ sub.subscribers }}</h1>
-{% endif %}
-{% endfor %}
-<h1>{{ request.user.username }}</h1>
-{% block content %}
-<h2>Post in your new Community</h2>
-<form method="POST" class="subpostform" >
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="save btn btn-default">Submit</button>
-</form>
-{% endblock %}
+<h1>Welcome, {{ request.user.username }}</h1>
+<a href="/">Home</a>
+<a href="/subscribe/{{ sub.url }}">Join</a>
+{% endfor %} {% for post in posts %}
+<div>
+  <p>title: {{ post.title }}</p>
+  <p>body: {{ post.body }}</p>
+  <p>url: {{ post.url }}</p>
+</br>
+</div>
+{% endfor %} {% include 'postform.html'%}
