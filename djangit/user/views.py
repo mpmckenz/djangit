@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -20,7 +20,7 @@ class Homepage(View):
         active_user = request.user.djangituser
         currently_moderatoring = Subdjangit.objects.filter(
             moderator=active_user)
-
+        joined_subdjangits = active_user.subscriptions.all()
         # sortby_highest_voted_posts = Post.objects.all().order_by('-upvotes')
 
         # sortby_lowest_voted_posts = Post.objects.all().order_by('-downvotes')
@@ -34,9 +34,16 @@ class Homepage(View):
 
         # data = {'followed_user_posts': followed_user_posts,
         # 'logged_in_user_details': logged_in_user_details, 'list_of_followed_usernames': list_of_followed_usernames}
-        data = {"all_users": all_users,
+        data = {"all_users": all_users, "joined_subdjangits": joined_subdjangits,
                 "currently_moderatoring": currently_moderatoring}
         return render(request, html, data)
+
+
+class AllUsers(View):
+    def get(self, request):
+        html = 'allusers.html'
+        all_users = DjangitUser.objects.all()
+        return render(request, html, {"all_users": all_users})
 
 
 class ViewSpecificUserHomepage(View):
@@ -49,13 +56,17 @@ class ViewSpecificUserHomepage(View):
         return render(request, html, data)
 
 
-class SubscribeToSubdjangit(View):
-    def get(self, request, subdjangit):
-        subdjangit = DjangitUser.objects.filter(
-            subdjangit=subdjangit).first()
-        if subdjangit not in request.user.subscriptions.get_queryset():
-            request.user.subscriptions.add(subdjangit)
+class ToggleSubscription(View):
+    def get(self, request, url):
+        subdjangit = Subdjangit.objects.filter(url=url).first()
+        active_user = request.user.djangituser
+        if subdjangit not in active_user.subscriptions.all():
+            active_user.subscriptions.add(
+                subdjangit
+            )
+            return redirect("/r/{}".format(url))
         else:
-            request.user.following.remove(subdjangit)
-        request.user.save()
-        return redirect("/{}/".format(subdjangit))
+            active_user.subscriptions.remove(
+                subdjangit
+            )
+            return redirect("/")

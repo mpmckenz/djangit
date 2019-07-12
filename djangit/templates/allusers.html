@@ -1,0 +1,7 @@
+<div class="show_all_users">
+  {% for user in all_users %}
+  <a href="/user/{{ user.username }}/"> {{ user.username }} </a><br />
+  {% endfor %}
+</div>
+</br>
+<a href='/'>Home</a>
