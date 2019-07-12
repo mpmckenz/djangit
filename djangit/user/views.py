@@ -40,6 +40,8 @@ class Homepage(View):
 
 
 class AllUsers(View):
+    """Returns a list of all users"""
+
     def get(self, request):
         html = 'allusers.html'
         all_users = DjangitUser.objects.all()
@@ -47,6 +49,8 @@ class AllUsers(View):
 
 
 class ViewSpecificUserHomepage(View):
+    """User can view other user pages"""
+
     def get(self, request, username):
         html = "viewspecificuserhomepage.html"
         specific_user = DjangitUser.objects.filter(username=username).first()
@@ -57,6 +61,8 @@ class ViewSpecificUserHomepage(View):
 
 
 class ToggleSubscription(View):
+    """User can toggle joining subdjangit community"""
+
     def get(self, request, url):
         subdjangit = Subdjangit.objects.filter(url=url).first()
         active_user = request.user.djangituser
@@ -70,3 +76,23 @@ class ToggleSubscription(View):
                 subdjangit
             )
             return redirect("/")
+
+
+class DeletePost(View):
+    """moderator of a subdjangit can delete posts"""
+
+    def get(self, request, id, url):
+        active_user = request.user.djangituser
+        moderator = Subdjangit.objects.filter(moderator=active_user)
+        if moderator:
+            Post.objects.filter(id=id).delete()
+        return redirect("/r/{}".format(url))
+
+
+class DeleteSubdjangit(View):
+    """Deletes subdjangit if logged in user is moderator"""
+
+    def delete(self, request, subdjangit):
+        subdjangit = Subdjangit.objects.filter(title=subdjangit)
+        subdjangit.delete()
+        return HttpResponseRedirect('/')
