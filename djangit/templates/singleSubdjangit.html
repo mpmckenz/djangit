@@ -13,8 +13,8 @@
   <p>body: {{ post.body }}</p>
   <p>url: {{ post.url }}</p>
   <p>{{ post.vote_score }}</p>
-  <button class="button" name="upvote" type="submit" value="{{ post.id }}">upvote</button>
-  <button class="button" name="downvote" type="submit" value="{{ post.id }}">downvote</button>
+  <button class="button" name="upvote" type="submit" value="upvote">upvote</button>
+  <button class="button" name="downvote" type="submit" value="downvote">downvote</button>
 </br>
 </div>
 {% endfor %} {% include 'postform.html'%}
