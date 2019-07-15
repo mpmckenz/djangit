@@ -7,12 +7,15 @@
 <h1>Welcome, {{ request.user.username }}</h1>
 <a href="/">Home</a>
 <a href="/subscribe/{{ sub.url }}">Join</a>
-{% endfor %} {% for post in posts %}
+{% for post in posts %}
 <div>
   <p>title: {{ post.title }}</p>
   <p>body: {{ post.body }}</p>
   <p>url: {{ post.url }}</p>
+  {% if sub in moderator %}
+  <a href='/deletepost/{{post.id}}/{{sub.url}}'>Delete</a>
+  {% endif %}
 </br>
 </div>
-{% endfor %} {% include 'postform.html'%} 
-
+{% endfor %} 
+{% endfor %} {% include 'postform.html'%}

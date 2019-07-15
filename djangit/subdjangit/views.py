@@ -36,10 +36,14 @@ class SingleSubdjangit(View):
         form = PostForm()
         html = "singleSubdjangit.html"
         subdjangit = Subdjangit.objects.filter(url=url)
+
+        active_user = request.user.djangituser
+        moderator = Subdjangit.objects.all().filter(moderator=active_user)
+
         subdjangit_posts = Subdjangit.objects.filter(url=url)
         posts = Post.objects.all().filter(url=url)
 
-        return render(request, html, {"subdjangit": subdjangit, "form": form, "posts": posts})
+        return render(request, html, {"subdjangit": subdjangit, "form": form, "posts": posts, "moderator": list(moderator)})
 
     def post(self, request, url):
         html = "singleSubdjangit.html"
@@ -96,10 +100,10 @@ class CreateSubdjangit(View):
                     return HttpResponseRedirect('/')
 
 
-class DeleteSubdjangit(View):
-    """Deletes subdjangit if logged in user is moderator"""
+# class DeleteSubdjangit(View):
+#     """Deletes subdjangit if logged in user is moderator"""
 
-    def delete(self, request, subdjangit):
-        subdjangit = Subdjangit.objects.filter(title=subdjangit)
-        subdjangit.delete()
-        return HttpResponseRedirect('/')
+#     def delete(self, request, subdjangit):
+#         subdjangit = Subdjangit.objects.filter(title=subdjangit)
+#         subdjangit.delete()
+#         return HttpResponseRedirect('/')
