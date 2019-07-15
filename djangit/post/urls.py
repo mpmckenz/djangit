@@ -7,7 +7,7 @@ from django.contrib import admin
 admin.site.register(Post)
 
 
+
 urlpatterns = [
     path("post/", MyPost.as_view()),
-    # url(r'^$', include('comments.urls')),
 ]

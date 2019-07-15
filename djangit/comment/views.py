@@ -13,7 +13,7 @@ def add_comment_to_post(request, pk):
           comment.post= post
           comment.user = request.user
           comment.save()
-          return redirect('postform.html', slug=post.slug)
+          return redirect('comments.html', slug=post.slug)
    else:
        form = CommentForm()
    return render(request, 'comment.html', {'form':form})

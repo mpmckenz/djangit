@@ -11,5 +11,7 @@ class Comment(models.Model):
     text = models.TextField(max_length=250, default='')
     created_date = models.DateTimeField(default=timezone.now)
     # approved_comment = models.BooleanField(default=False)
+
+    
    
 

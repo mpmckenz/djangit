@@ -24,34 +24,36 @@ class MyPost(View):
             )
             return redirect('/r/<str:url>/')
 
-class AddPostToComment(View):
-    form_class = CommentForm
-
-    def get(self, request, post_id):
-        response = {}
-        post = Post.objects.get(id=post_id)
-        comments = sort_comment(post.comments_set.get_queryt())
-        response.update({"post": post})
-        response.update({"form": self.form_class()})
-        response.update({"comments": comments})
-        return render(request, "post.html", response)
 
 
-    def post(self, request, post_id):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            data = data.cleaned_data
-            Comment.objects.create(
-                text=['text'],
-                user=request.user.djangituser,
-                post=Post.objects.get(id=post_id),
-                )
-        return HttpResponseRedirect(reverse('post',
-                                            kwargs={"subdjangit": subdjangit,
-                                                    "post_id": post_id}))
+# class AddPostToComment(View):
+#     form_class = CommentForm
 
-    # def _addposttocomment(request, post_id):
-    #     try:
+#     def get(self, request, post_id):
+#         response = {}
+#         post = Post.objects.get(id=post_id)
+#         comments = sort_comment(post.comments_set.get_queryt())
+#         response.update({"post": post})
+#         response.update({"form": self.form_class()})
+#         response.update({"comments": comments})
+#         return render(request, "post.html", response)
+
+
+#     def post(self, request, post_id):
+#         form = self.form_class(request.POST)
+#         if form.is_valid():
+#             data = data.cleaned_data
+#             Comment.objects.create(
+#                 text=['text'],
+#                 user=request.user.djangituser,
+#                 post=Post.objects.get(id=post_id),
+#                 )
+#         return HttpResponseRedirect(reverse('post',
+#                                             kwargs={"subdjangit": subdjangit,
+#                                                     "post_id": post_id}))
+
+#     # def _addposttocomment(request, post_id):
+#     #     try:
     #         post = Post.objects.get(id=post_id)
     #         context['post'] = post
     #         context['form'] = CommentForm()

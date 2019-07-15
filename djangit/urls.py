@@ -25,6 +25,7 @@ from djangit.subdjangit.urls import urlpatterns as subdjangit_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
    
+   
     
 ]
 
