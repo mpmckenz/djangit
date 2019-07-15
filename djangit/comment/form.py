@@ -1,8 +1,7 @@
-from django.forms import ModelForm
+from django import forms
 from djangit.comment.models import Comment
 
 
-class CommentForm(ModelForm):
-    class Meta:
+class CommentForm(forms.Form):
         model = Comment
-        fields = ['body']
+        fields = ['post', 'user', 'text', 'created_date']

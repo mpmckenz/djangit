@@ -21,8 +21,10 @@ from djangit.notification.urls import urlpatterns as notification_urls
 from djangit.authentication.urls import urlpatterns as authentication_urls
 from djangit.subdjangit.urls import urlpatterns as subdjangit_urls
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+   
     
 ]
 
@@ -31,3 +33,4 @@ urlpatterns += post_urls
 urlpatterns += notification_urls
 urlpatterns += user_urls
 urlpatterns += subdjangit_urls
+
