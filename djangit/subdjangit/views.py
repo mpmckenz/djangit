@@ -29,14 +29,20 @@ class SingleSubdjangit(View):
         form = PostForm()
         html = "singleSubdjangit.html"
         subdjangit = Subdjangit.objects.filter(url=url)
-
         active_user = request.user.djangituser
+        sub_button = ""
+        # active_user.subscriptions.get_queryset().get(id=int(id))
+
+        if subdjangit not in active_user.subscriptions.all():
+            sub_button = "Unjoin"
+        elif subdjangit in active_user.subscriptions.all():
+            sub_button = "Join"
         moderator = Subdjangit.objects.all().filter(moderator=active_user)
 
-        subdjangit_posts = Subdjangit.objects.filter(url=url)
+        # subdjangit_posts = Subdjangit.objects.filter(url=url)
         posts = Post.objects.all().filter(url=url)
 
-        return render(request, html, {"subdjangit": subdjangit, "form": form, "posts": posts, "moderator": list(moderator)})
+        return render(request, html, {"subdjangit": subdjangit, "form": form, "posts": posts, "moderator": list(moderator), "sub_button": sub_button})
 
     def post(self, request, url):
         html = "singleSubdjangit.html"

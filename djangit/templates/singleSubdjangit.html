@@ -23,7 +23,13 @@
   <h3>{{ sub.created_at }}</h3>
   <br/>
   <a href="/">Home</a>
-  <a href="/subscribe/{{ sub.url }}">Join</a>
+  <!-- {% if sub.id not in request.user.djangituser.subscriptions %}
+  <a href="/subscribe/{{ sub.url }}">Unjoin</a>
+  {% else %} -->
+  {% if sub_button %}  
+  <a href="/subscribe/{{ sub.url }}">{{sub_button}}</a>
+  {% endif %}
+  <!-- {% endif %} -->
   <div style="display: flex; flex-wrap: wrap; justify-content: space-around">
     {% for post in posts %}
       <div class="card">
