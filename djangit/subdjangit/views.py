@@ -43,22 +43,19 @@ class SingleSubdjangit(View):
         # path_info = request.META.get('PATH_INFO')
         form = PostForm(request.POST)
         if "upvote" in request.POST:
-            post_thing = request.POST.get("upvote")[-1]
-            post = Post.objects.get(id=int(post_thing))
-            # print(post)
-            if post.votes.exists(request.user.id):
+            post_thing = int(request.POST.get("upvote"))
+            post = Post.objects.get(id=post_thing)
+            result = post.votes.up(request.user.id)
+            if not result:
                 post.votes.delete(request.user.id)
-            else:
-                post.votes.up(request.user.id)
             return redirect('/r/{}'.format(url))
-        if "downvote" in request.POST:
-            post_thing = request.POST.get("downvote")[-1]
-            post = Post.objects.get(id=int(post_thing))
-            if post.votes.exists(request.user.id):
+        elif "downvote" in request.POST:
+            post_thing = int(request.POST.get("downvote"))
+            post = Post.objects.get(id=post_thing)
+            # not sure if exisst, so check if voting down works since catn be in down state once+
+            result = post.votes.down(request.user.id)
+            if not result:
                 post.votes.delete(request.user.id)
-            else:
-                post.votes.down(request.user.id)
-                # num_vote_down += 1
             return redirect('/r/{}'.format(url))
         if form.is_valid():
             data = form.cleaned_data
