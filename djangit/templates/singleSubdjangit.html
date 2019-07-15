@@ -1,21 +1,53 @@
+<style>
+  .card {
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 20%;
+    border-radius: 10px;
+    padding: 2%;
+    background-color: lightcyan;
+  }
+  .card:hover {
+    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
+  }
+  .container {
+    padding: 2px 16px;
+  }
+</style>
+
 {% for sub in subdjangit %}
-<h1>{{ sub.title }}</h1>
-<h1>Subdjangit moderator: {{ sub.moderator }}</h1>
-<h3>r/{{ sub.url }}</h3>
-<h1>{{ sub.about }}</h1>
-<h1>{{ sub.created_at }}</h1>
-<h1>Welcome, {{ request.user.username }}</h1>
-<a href="/">Home</a>
-<a href="/subscribe/{{ sub.url }}">Join</a>
-{% for post in posts %}
-<div>
-  <p>title: {{ post.title }}</p>
-  <p>body: {{ post.body }}</p>
-  <p>url: {{ post.url }}</p>
-  {% if sub in moderator %}
-  <a href='/deletepost/{{post.id}}/{{sub.url}}'>Delete</a>
-  {% endif %}
-</br>
-</div>
+  <h1>{{ sub.title }}</h1>
+  <h1>Subdjangit moderator: {{ sub.moderator }}</h1>
+  <h3>r/{{ sub.url }}</h3>
+  <h1>{{ sub.about }}</h1>
+  <h1>{{ sub.created_at }}</h1>
+  <h1>Welcome, {{ request.user.username }}</h1>
+  <a href="/">Home</a>
+  <a href="/subscribe/{{ sub.url }}">Join</a>
+  {% for post in posts %}
+    <div class="card">
+      <p>title: {{ post.title }}</p>
+      <p>body: {{ post.body }}</p>
+      <p>url: {{ post.url }}</p>
+      <p>Total votes: {{ post.vote_score }}</p>
+      <p>Upvotes: {{ post.num_vote_up }}</p>
+      <p>Downvotes: {{ post.num_vote_down }}</p>
+      <form method="post" action="/r/{{sub.url}}/" style="display: inline">
+      {% csrf_token %}
+      <input type="hidden" value="upvote" name="upvote"></input>
+      <input type="hidden" value={{ post.id }} name="upvote"></input>
+      <button type="submit" class="butt">Upvote</button>
+      </form>
+      <form method="post" action="/r/{{sub.url}}/" style="display: inline">
+      {% csrf_token %}
+      <input type="hidden" value="downvote" name="downvote"></input>
+      <input type="hidden" value={{ post.id }} name="downvote"></input>
+      <button type="submit" class="butt">Downvote</button>
+      </form>
+      {% if sub in moderator %}
+        <a href='/deletepost/{{post.id}}/{{sub.url}}'>Delete</a>
+      {% endif %}
+    </div>
+  {% endfor %} 
 {% endfor %} 
-{% endfor %} {% include 'postform.html'%}
+{% include 'postform.html'%}
