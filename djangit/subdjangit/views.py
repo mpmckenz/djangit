@@ -72,6 +72,16 @@ class SingleSubdjangit(View):
         else:
             form = PostForm
         return render(request, "singleSubdangit.html", {'form': form})
+
+    def comment_new(self, request):
+        if request.method == 'POST':
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.save()
+                return redirect('comment.html', pk=comment.pk)
+        else:
+            form = CommentForm
+        return render(request, "comment.html", {'form': form} )
         
 
 

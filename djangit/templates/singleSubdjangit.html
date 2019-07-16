@@ -16,8 +16,10 @@
   <a href='/deletepost/{{post.id}}/{{sub.url}}'>Delete</a>
   {% endif %}
 </br>
-<a class="btn btn-default" href="">Add comment</a>
+
+<p>Disagree? Tell Us About It</p>
+<a class="button" href="/r/{{ comments.url }}/">Comment</a>
 </div>
 
 {% endfor %} 
-{% endfor %} {% include 'postform.html'%}
+{% endfor %} {% include 'postform.html'%} {% include 'comment.html' %}

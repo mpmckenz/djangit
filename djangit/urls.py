@@ -20,7 +20,8 @@ from djangit.post.urls import urlpatterns as post_urls
 from djangit.notification.urls import urlpatterns as notification_urls
 from djangit.authentication.urls import urlpatterns as authentication_urls
 from djangit.subdjangit.urls import urlpatterns as subdjangit_urls
-from djangit.subdjangit.urls import urlpatterns as comment_urls
+
+
 
 
 urlpatterns = [
@@ -35,5 +36,6 @@ urlpatterns += post_urls
 urlpatterns += notification_urls
 urlpatterns += user_urls
 urlpatterns += subdjangit_urls
-urlpatterns += comment_urls
+
+
 

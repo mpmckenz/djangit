@@ -1,13 +1,10 @@
-{% extends 'postform.html' %}
-{% block content %}
 <h1>Comment Here</h1>
-<form action="/comment/" method="post">
+<form action="" method="post">
   {%csrf_token %}
   {{ form.as_p }}
-  {% for comment in comments %}
-  <button type="submit" class="save btn btn-default" >Comment</button>
-  {% endfor %}
+  <button type="submit" class="save btn btn-default" >Submit</button>
+
 </form>
 <a href="/singleSubdjangit/">Back to your community</a>
 
-{% endblock %}
+

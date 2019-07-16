@@ -10,4 +10,5 @@ urlpatterns = [
     path("subdjangits/", SubdjangitList.as_view(), name="subdjangits"),
     path("createsubdjangit/", CreateSubdjangit.as_view(), name='createsubdjangit'),
     path("r/<str:url>/", SingleSubdjangit.as_view(), name="singlesubdjangit"),
+    
 ]
