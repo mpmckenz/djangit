@@ -6,6 +6,7 @@ from django.views import View
 
 class Add_comment_to_post(View):
     """Add a comment to post from a Subdjangit Community"""
+    
     form_class = CommentForm()
 
     def get(self, request):

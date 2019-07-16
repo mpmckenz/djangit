@@ -8,10 +8,7 @@ from djangit.subdjangit.models import Subdjangit
 
 
 class CommentonPost(View):
-
-    # a get to filter out that specific post id and stuff; 
-    # def post in the post class what we need to create the comment
-    #somewhat like the singlesubjangit
+    #we don't want the id of the comment but we want the id of the post
     """Creates a post under to current Subdjangit Community"""
     form_class = CommentForm
 
