@@ -1,1 +1,7 @@
 {% include 'comment.html' %}
+{% for comment in comments %}
+<p>{{ comment.user }}</p>
+<p>{{ comment.text }}</p>
+<p>{{ comment.date_created }}</p>
+
+{% endfor %}

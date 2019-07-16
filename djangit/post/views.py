@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from djangit.comment.form import CommentForm
 from djangit.post.form import PostForm
+from djangit.post.models import Post
 from django.views import View
 from djangit.comment.models import Comment
 from djangit.subdjangit.models import Subdjangit
@@ -25,16 +26,15 @@ class CommentonPost(View):
         
         return render(request, html, {"subdjangit": subdjangit, "form": form, "comments": comments})
 
-    def post(self, request, id, url):
+    def post(self, request, url, id):
         html = "post.html"
         form = self.form_class(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             Comment.objects.create(
                 user=request.user.djangituser,
-                url='{}'.format(url),
                 text=data['text'],
-                # id='{}'.format(id),
+                post=Post.objects.get(id=id)
                 
 
             )

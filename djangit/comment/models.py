@@ -10,6 +10,7 @@ class Comment(models.Model):
     user = models.ForeignKey(DjangitUser, on_delete=False)
     text = models.TextField(max_length=1000, default='')
     created_date = models.DateTimeField(default=timezone.now)
+    
     # approved_comment = models.BooleanField(default=False)
 
     def __str__(self):
