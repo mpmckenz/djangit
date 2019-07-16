@@ -51,7 +51,9 @@
         {% if sub in moderator %}
           <a href='/deletepost/{{post.id}}/{{sub.url}}/'>Delete</a>
         {% endif %}
+        <a href="/r/{{sub.url}}/post/{{post.id}}/">Comment</a>
       </div>
+    
     {% endfor %} 
   </div> 
 {% endfor %} 

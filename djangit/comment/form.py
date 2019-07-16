@@ -3,5 +3,4 @@ from djangit.comment.models import Comment
 
 
 class CommentForm(forms.Form):
-        model = Comment
-        fields = ['post', 'user', 'text', 'created_date']
+        text = forms.CharField(widget=forms.Textarea)

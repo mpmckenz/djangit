@@ -10,5 +10,5 @@ admin.site.register(Comment)
 
 
 urlpatterns = [
-    path("comment/<int:id>", Add_comment_to_post.as_view(), name='comment')
+    path("comment/<int:id>", Add_comment_to_post.as_view(), namespace='comment')
 ]
