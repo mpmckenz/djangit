@@ -66,49 +66,53 @@
         <h3>
           <b>{{ request.user.username }}</b>
         </h3>
-        <h3>Followings:</h3>
         <p>
-          Joined Subdjangits:{% for community in joined_subdjangits %}
-          {{ community.title }}, {% endfor %}
+          <b>
+            Joined Subdjangits:
+          </b>
+          {% for community in joined_subdjangits %}
+          <a href="/r/{{ community.url }}/">{{ community.title }}</a
+          >, {% endfor %}
         </p>
         <p>
-          Your Subdjangits: {% for group in currently_moderatoring %}
-          {{ group }}, {%endfor%}
+          <b>Your Subdjangits:</b> {% for group in currently_moderatoring %}
+          <a href="/r/{{ group.url }}/">{{ group.title }}</a
+          >,{%endfor%}
         </p>
       </div>
     </div>
     <br />
+    {% for item in active_user_posts %}
+    <div class="card">
+      {% for user_community in active_user_subdjangit_title %}
+      <a href="">{{ user_community.title }}</a>
+      {% endfor %}
+      <br />
+      <a href="/user/{{ item.user }}">{{ item.user }}</a>
+      <p>{{ item.date_created }}</p>
+      <p>
+        <b>{{ item.title }}</b>
+      </p>
+      <p>
+        <i>{{ item.body }}</i>
+      </p>
+    </div>
     <br />
+    {% for item in joined_subdjangit_posts %}
+    <div class="card">
+      {% for sub_title in subdjangit_title %}
+      <a href="">{{ sub_title.title }}</a>
+      <br />
+      <a href="/user/{{ item.user }}">{{ item.user }}</a>
+      <p>{{ item.date_created }}</p>
+      <p>
+        <b>{{ item.title }}</b>
+      </p>
+      <p>
+        <i>{{ item.body }}</i>
+      </p>
+    </div>
     <br />
-    <h1>DEV NOTES for homepage:</h1>
-    <h2>navbar</h2>
-    <p>
-      SEARCH BAR: return results of usernames or community_names that contain
-      search input
-    </p>
-    <p>
-      create community and become moderator of that community (ability to delete
-      other users posts in your community)
-    </p>
-    <h2>homepage body</h2>
-    <p>posts of followed users and joined communities</p>
-    <h2>post details (see card div below)</h2>
-    <p>
-      note: each post is wrapped in an a tag to make entire div clickable ->
-      going to post
-    </p>
-    <a href="">
-      <div class="card">
-        <a href="">Community link to all commumity posts</a><br />
-        <a href="">User link to all their posts</a>
-        <p>timestamp here</p>
-        <p>Djangit Title Here</p>
-        <p>Djangit message body here</p>
-        <p>number of comments of this post</p>
-        <p>upvote option</p>
-        <p>(sum of upvotes - downvotes)</p>
-        <p>downvote option</p>
-      </div>
-    </a>
+    {% endfor %} {% endfor %} {% endfor %}
   </body>
 </html>

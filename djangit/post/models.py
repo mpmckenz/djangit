@@ -13,5 +13,8 @@ class Post(VoteModel, models.Model):
     # upvotes = models.IntegerField(default=0)
     # downvotes = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.title[:50]
+
     def get_score(self):
         return self.upvotes - self.downvotes
