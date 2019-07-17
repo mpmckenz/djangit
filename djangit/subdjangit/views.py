@@ -20,13 +20,8 @@ class SubdjangitList(View):
         subdjangits = Subdjangit.objects.all().order_by("title")
         return render(request, html, {"subdjangits": subdjangits})
 
-   
-
-
-
-    #creating the option to post in the community and see all posts that have been made and then 
-    #click on the post which leads to a different template and begins the thread. 
-
+    # creating the option to post in the community and see all posts that have been made and then
+    # click on the post which leads to a different template and begins the thread.
 
 
 class SingleSubdjangit(View):
@@ -97,7 +92,6 @@ class SingleSubdjangit(View):
     #     else:
     #         form = CommentForm
     #     return render(request, "comment.html", {'form': form} )
-        
 
 
 class CreateSubdjangit(View):
@@ -122,13 +116,14 @@ class CreateSubdjangit(View):
                         title=data["title"],
                         about=data["about"],
                     )
-                    return HttpResponseRedirect('/')
+                    return HttpResponseRedirect('/r/{}/'.format(data['url']))
+                else:
+                    return render(request, "cannotcreatesubdjangit.html", {"form": form})
 
+                    # class DeleteSubdjangit(View):
+                    #     """Deletes subdjangit if logged in user is moderator"""
 
-# class DeleteSubdjangit(View):
-#     """Deletes subdjangit if logged in user is moderator"""
-
-#     def delete(self, request, subdjangit):
-#         subdjangit = Subdjangit.objects.filter(title=subdjangit)
-#         subdjangit.delete()
-#         return HttpResponseRedirect('/')
+                    #     def delete(self, request, subdjangit):
+                    #         subdjangit = Subdjangit.objects.filter(title=subdjangit)
+                    #         subdjangit.delete()
+                    #         return HttpResponseRedirect('/')

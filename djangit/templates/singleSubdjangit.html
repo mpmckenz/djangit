@@ -60,9 +60,9 @@
     <div class="words"> 
     {% for sub in subdjangit %}
     <p class="words">{{ sub.title }}<p>
-    <p class="words">r/{{ sub.url }} is moderated by: {{ sub.moderator }}<p>
-    <p class="words">{{ sub.about }}<p>
-    <p class="words">{{ sub.created_at }}<p>
+      &nbsp;<p class="words">r/{{ sub.url }} is moderated by: {{ sub.moderator }}<p>
+      &nbsp; <p class="words">{{ sub.about }}<p>
+      &nbsp;<p class="words">{{ sub.created_at }}<p>
     </div>
   <br/>
  
@@ -91,10 +91,10 @@
         </form>
         <br/>
         <br/>
+        <a href="/r/{{sub.url}}/post/{{post.id}}/" class="words">Comment</a>
         {% if sub in moderator %}
           <a href='/deletepost/{{post.id}}/{{sub.url}}/' class="words">Delete</a>
         {% endif %}
-        <a href="/r/{{sub.url}}/post/{{post.id}}/" class="words">Comment</a>
       </div>
     
     {% endfor %} 
