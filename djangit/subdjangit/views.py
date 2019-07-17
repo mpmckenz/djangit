@@ -73,15 +73,15 @@ class SingleSubdjangit(View):
             return redirect('/r/{}'.format(url))
             # return render(request, '/r/{}'.format(url), {"posts": posts})
 
-    def post_new(self, request):
-        if request.method == 'POST':
-            if form.is_valid():
-                post = form.save(commit=False)
-                post.save()
-                return redirect('singleSubdjangit.html', pk=post.pk)
-        else:
-            form = PostForm
-        return render(request, "singleSubdangit.html", {'form': form})
+    # def post_new(self, request):
+    #     if request.method == 'POST':
+    #         if form.is_valid():
+    #             post = form.save(commit=False)
+    #             post.save()
+    #             return redirect('singleSubdjangit.html', pk=post.pk)
+    #     else:
+    #         form = PostForm
+    #     return render(request, "singleSubdangit.html", {'form': form})
 
     # def comment_new(self, request):
     #     if request.method == 'POST':
