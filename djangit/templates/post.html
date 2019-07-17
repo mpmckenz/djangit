@@ -1,7 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    .comment {
+        color: #231f20;
+
+    }
+    .container {
+        text-align: center;
+    }
+</style>
+
 {% include 'comment.html' %}
 {% for comment in comments %}
-<p>{{ comment.user }}</p>
-<p>{{ comment.text }}</p>
+<body class="container">
+<p class="comment">{{ comment.user }}</p>
+<p class="comment">{{ comment.text }}</p>
 <p>{{ comment.date_created }}</p>
-
 {% endfor %}
+</body>
+</html>

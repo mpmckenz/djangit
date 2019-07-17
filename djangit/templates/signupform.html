@@ -1,7 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    .container {
+      background-color: #f6f6f6;
+      font-family: proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 14px;
+      font-weight:400;
+      letter-spacing: 3px;
+      color: #231f20;
+      text-transform: uppercase;
+      line-height: 1.5em;
+    }
+    .login {
+      font-family: proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 14px;
+      font-weight:400;
+      letter-spacing: 3px;
+      color: #231f20;
+      text-transform: uppercase;
+      line-height: 1.5em;
+      
+    }
+
+  </style>
+
+<body class="container"></body>
 <h1>Signup</h1>
 <form action="" method="post">
   {%csrf_token %}
   {{ form.as_p }}
   <input type="submit" value="Submit" />
 </form>
-<a href="/login/">Login</a>
+<br>
+<a href="/login/" class="login">Login</a>
+</body>
+</html>

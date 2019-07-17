@@ -2,27 +2,8 @@
 <html>
   <head>
     <style>
-      ul {
-        list-style: none;
-        margin: 0 2px;
-        padding: 0;
-        display: flex;
-        justify-content: space-around;
-      }
-      a {
-        display: inline;
-      }
-      .button {
-        color: white;
-        background-color: gray;
-        padding: 0.5% 0.8%;
-        cursor: pointer;
-        border-radius: 10px;
-        font-size: 1em;
-        text-decoration: none;
-      }
-      .button:hover {
-        background-color: black;
+      .container {
+        background-color: #f6f6f6;
       }
       .card {
         box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
@@ -30,14 +11,13 @@
         width: 20%;
         border-radius: 10px;
         padding: 2%;
-        background-color: lightcyan;
-      }
+        background-color: #e6ffff;
+
+  }
       .card:hover {
-        box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-      }
-      .container {
-        padding: 2px 16px;
-      }
+        box-shadow: 0 8px 30px 0 rgba(104, 98, 98, 0.2);
+  }
+    
     </style>
     <script>
       function show() {
@@ -46,27 +26,14 @@
       }
     </script>
   </head>
-  <body>
-    <ul>
-      <a class="button" href="/">Home</a>
-      <a class="button" href="">Highest Voted Posts</a>
-      <a class="button" href="">Lowest Voted Posts</a>
-      <a class="button" href="">Newest Posts</a>
-      <a class="button" href="/createsubdjangit/">Create Communtiy</a>
-      <a class="button" href="/allusers/">All Users</a>
-      <!-- <a class="button" href="/notifications/"
-        >Notifications: {{ notification_count }}</a
-        > -->
-      <a class="button" href="/subdjangits/">All Subdjangits</a>
-      <a class="button" href="/logout/">Sign Out</a>
-    </ul>
+  {% include 'navbar.html' %}
+  <body class="container">
+   
     <hr />
-    <div class="card">
-      <div container="container">
+      <div class="card">
         <h3>
           <b>{{ request.user.username }}</b>
         </h3>
-        <h3>Followings:</h3>
         <p>
           Joined Subdjangits:{% for community in joined_subdjangits %}
           {{ community.title }}, {% endfor %}
@@ -80,35 +47,7 @@
     <br />
     <br />
     <br />
-    <h1>DEV NOTES for homepage:</h1>
-    <h2>navbar</h2>
-    <p>
-      SEARCH BAR: return results of usernames or community_names that contain
-      search input
-    </p>
-    <p>
-      create community and become moderator of that community (ability to delete
-      other users posts in your community)
-    </p>
-    <h2>homepage body</h2>
-    <p>posts of followed users and joined communities</p>
-    <h2>post details (see card div below)</h2>
-    <p>
-      note: each post is wrapped in an a tag to make entire div clickable ->
-      going to post
-    </p>
-    <a href="">
-      <div class="card">
-        <a href="">Community link to all commumity posts</a><br />
-        <a href="">User link to all their posts</a>
-        <p>timestamp here</p>
-        <p>Djangit Title Here</p>
-        <p>Djangit message body here</p>
-        <p>number of comments of this post</p>
-        <p>upvote option</p>
-        <p>(sum of upvotes - downvotes)</p>
-        <p>downvote option</p>
-      </div>
+    
     </a>
   </body>
 </html>

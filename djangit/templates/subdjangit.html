@@ -1,10 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        .container {
+            background-color: #f6f6f6;
+            text-align: center;
+            font-family:proxima-nova, sans-serif !important;
+            font-style: normal;
+            font-size: 14px;
+            font-weight:400;
+            letter-spacing: 3px;
+            color: #231f20;
+            text-transform: uppercase;
+            line-height: 1.5em;
+            
+        }
+        .list {
+            text-align: center;
+            font-family:proxima-nova, sans-serif !important;
+            font-style: normal;
+            font-size: 14px;
+            font-weight:400;
+            letter-spacing: 3px;
+            color: #231f20;
+            text-transform: uppercase;
+            line-height: 1.5em;
+            
+        }
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+       
+    </style>
+    {% include 'navbar.html' %}
 
-
-<h1>Subdjangit List</h1>
+<body class="container">
+<h2>Your Community List</h2>
 
 {% for subdjangit in subdjangits %} 
 <ul>
-    <li><p><a href="/r/{{ subdjangit.url }}/">{{ subdjangit.title }}</a>: {{subdjangit.about}}</p></li>
+    <li class="wrapper"><p><a href="/r/{{ subdjangit.url }}/" class="list">{{ subdjangit.title }}</a>: {{subdjangit.about}}</p></li>
 </ul>
 {% endfor %}
+</body>
+</html>
 
