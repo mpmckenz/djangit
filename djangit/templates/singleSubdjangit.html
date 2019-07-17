@@ -93,11 +93,11 @@
     <div class="communitycontent"> 
     <p>Welcome to:</p>
     {% for sub in subdjangit %}
-    <p>The {{ sub.title }} Community<p>
-    <p>moderated by: {{ sub.moderator }}<p>
-    <p>Topic: {{ sub.about }}<p>
-    <p>Created On: {{ sub.created_at }}<p>
-    <a href="/subscribe/{{ sub.url }}" class="subscribe">Subscribe</a>
+    <p class="words">{{ sub.title }}<p>
+      &nbsp;<p class="words">r/{{ sub.url }} is moderated by: {{ sub.moderator }}<p>
+      &nbsp; <p class="words">{{ sub.about }}<p>
+      &nbsp;<p class="words">{{ sub.created_at }}<p>
+      <a href="/subscribe/{{ sub.url }}" class="subscribe">Subscribe</a>
     </div>
   <br/>
   <div style="display: flex; flex-wrap: wrap; justify-content: space-around">
@@ -124,10 +124,10 @@
         </form>
         <br/>
         <br/>
+        <a href="/r/{{sub.url}}/post/{{post.id}}/" class="words">Comment</a>
         {% if sub in moderator %}
           <a href='/deletepost/{{post.id}}/{{sub.url}}/' class="delete">Delete</a>
         {% endif %}
-        <a href="/r/{{sub.url}}/post/{{post.id}}/" class="comment">Comment</a>
       </div>
     
     {% endfor %} 

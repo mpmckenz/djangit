@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html>
-
-<style>
+  <style>
     .comment {
-        color: #231f20;
-
+      color: #231f20;
     }
     .container {
-        text-align: center;
+      text-align: center;
     }
-</style>
+  </style>
 
-{% include 'comment.html' %}
-{% for comment in comments %}
-<body class="container">
-<p class="comment">{{ comment.user }}</p>
-<p class="comment">{{ comment.text }}</p>
-<p>{{ comment.date_created }}</p>
-{% endfor %}
-</body>
+  {% include 'comment.html' %}
+  <body class="container">
+    <p>title: {{ post_to_comment_on.title }}</p>
+    <p>body: {{ post_to_comment_on.body }}</p>
+    <p>url: {{ post_to_comment_on.url }}</p>
+    <br />
+    <br />
+    <h2>COMMENT</h2>
+    {% for comment in comments %}
+    <p>
+      Comment belong to this post: <b>{{ comment.post }}</b>
+    </p>
+    <p class="comment">user: {{ comment.user }}</p>
+    <p class="comment">text: {{ comment.text }}</p>
+    <p class="comment">created date: {{ comment.created_date }}</p>
+    <br />
+    {% endfor %}
+  </body>
 </html>

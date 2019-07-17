@@ -4,10 +4,10 @@
   <style>
     .navbar {
       text-align: center;
-      font-family:proxima-nova, sans-serif !important;
+      font-family: proxima-nova, sans-serif !important;
       font-style: normal;
       font-size: 16px;
-      font-weight:400;
+      font-weight: 400;
       letter-spacing: 3px;
       color: #231f20;
       text-transform: uppercase;
@@ -16,10 +16,11 @@
     }
   </style>
 
-<nav class="navbar">
-  <a class="navbar" href="/">Home</a>
-  <a class="navbar" href="/subdjangits">Communities</a>
-  <a class="navbar" href="/djangituser/{{ user.id }}">Profile</a>
-  <a class="navbar" href="/logout">Logout</a>
-</nav>
+  <nav class="navbar">
+    <a class="navbar" href="/">Home</a>
+    <a class="navbar" href="/subdjangits">Communities</a>
+    <a class="navbar" href="/createsubdjangit">Create Communities</a>
+    <a class="navbar" href="/user/{{ user.id }}">Profile</a>
+    <a class="navbar" href="/logout">Logout</a>
+  </nav>
 </html>
