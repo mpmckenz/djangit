@@ -27,11 +27,24 @@
       line-height: 1.5em;
     }
 
+    .form {
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2); 
+    transition: 0.3s;
+    border-radius: 10px;
+    padding: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    text-align: left;
+  }
+    
+
   </style>
-<div class="container">
+  
 {% include 'navbar.html' %}
+<div class="container">
 <h1 class="header">Comment Here</h1>
-<form action="" method="post">
+<form action="" method="post" class="form">
   {%csrf_token %}
   {{ form.as_p }}
 <button type="submit" class="save btn btn-default" >Submit</button>
