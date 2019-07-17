@@ -1,7 +1,25 @@
 <!-- href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="/">Home</a>
-  <a class="navbar-brand" href="/subdjangits">SubDjangits</a>
-  <a class="navbar-brand" href="/djangituser/{{ user.id }}">DjangitUser</a>
-  <a class="navbar-brand" href="/logout">Logout</a>
-</nav>
+<!DOCTYPE html>
+<html>
+  <style>
+    .navbar {
+      text-align: center;
+      font-family: proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: #231f20;
+      text-transform: uppercase;
+      line-height: 1.5em;
+    }
+  </style>
+
+  <nav class="navbar">
+    <a class="navbar" href="/">Home</a>
+    <a class="navbar" href="/subdjangits">Communities</a>
+    <a class="navbar" href="/createsubdjangit">Create Communities</a>
+    <a class="navbar" href="/user/{{ user.id }}">Profile</a>
+    <a class="navbar" href="/logout">Logout</a>
+  </nav>
+</html>

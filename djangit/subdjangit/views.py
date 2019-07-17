@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -20,6 +19,9 @@ class SubdjangitList(View):
         html = "subdjangit.html"
         subdjangits = Subdjangit.objects.all().order_by("title")
         return render(request, html, {"subdjangits": subdjangits})
+
+    # creating the option to post in the community and see all posts that have been made and then
+    # click on the post which leads to a different template and begins the thread.
 
 
 class SingleSubdjangit(View):
@@ -71,6 +73,26 @@ class SingleSubdjangit(View):
             return redirect('/r/{}'.format(url))
             # return render(request, '/r/{}'.format(url), {"posts": posts})
 
+    # def post_new(self, request):
+    #     if request.method == 'POST':
+    #         if form.is_valid():
+    #             post = form.save(commit=False)
+    #             post.save()
+    #             return redirect('singleSubdjangit.html', pk=post.pk)
+    #     else:
+    #         form = PostForm
+    #     return render(request, "singleSubdangit.html", {'form': form})
+
+    # def comment_new(self, request):
+    #     if request.method == 'POST':
+    #         if form.is_valid():
+    #             comment = form.save(commit=False)
+    #             comment.save()
+    #             return redirect('comment.html', pk=comment.pk)
+    #     else:
+    #         form = CommentForm
+    #     return render(request, "comment.html", {'form': form} )
+
 
 class CreateSubdjangit(View):
     """Creates a subdjangit or if it already exists, redirects to that subdjangit"""
@@ -94,13 +116,14 @@ class CreateSubdjangit(View):
                         title=data["title"],
                         about=data["about"],
                     )
-                    return HttpResponseRedirect('/')
+                    return HttpResponseRedirect('/r/{}/'.format(data['url']))
+                else:
+                    return render(request, "cannotcreatesubdjangit.html", {"form": form})
 
+                    # class DeleteSubdjangit(View):
+                    #     """Deletes subdjangit if logged in user is moderator"""
 
-# class DeleteSubdjangit(View):
-#     """Deletes subdjangit if logged in user is moderator"""
-
-#     def delete(self, request, subdjangit):
-#         subdjangit = Subdjangit.objects.filter(title=subdjangit)
-#         subdjangit.delete()
-#         return HttpResponseRedirect('/')
+                    #     def delete(self, request, subdjangit):
+                    #         subdjangit = Subdjangit.objects.filter(title=subdjangit)
+                    #         subdjangit.delete()
+                    #         return HttpResponseRedirect('/')

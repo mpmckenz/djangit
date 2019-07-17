@@ -1,11 +1,50 @@
+<!DOCTYPE html>
+<html>
+
 <style>
-  .card {
+  .container {
+    text-align: center;
+    font-family: proxima-nova, sans-serif !important;
+    font-style: normal;
+    font-size: 14px;
+    font-weight:400;
+    letter-spacing: 3px;
+    color: #231f20;
+    text-transform: uppercase;
+    line-height: 1.5em;
+
+  }
+  .words {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: proxima-nova, sans-serif !important;
+    font-style: normal;
+    font-size: 14px;
+    font-weight:400;
+    letter-spacing: 3px;
+    color: #231f20;
+    text-transform: uppercase;
+    line-height: 1.5em;
+    
+
+  }
+  .community-card {
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     width: 20%;
     border-radius: 10px;
     padding: 2%;
     background-color: lightcyan;
+
+  }
+  .card {
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 20%;
+    border-radius: 10px;
+    padding: 2%;
+    background-color: #997a6e;
 
   }
   .card:hover {
@@ -15,15 +54,19 @@
     padding: 2px 16px;
   }
 </style>
+<body class="container">
+{% include 'navbar.html' %}
 
-{% for sub in subdjangit %}
-  <h1>{{ sub.title }}</h1>
-  <h3>r/{{ sub.url }} is moderated by: {{ sub.moderator }}</h3>
-  <h1>{{ sub.about }}</h1>
-  <h3>{{ sub.created_at }}</h3>
+    <div class="words"> 
+    {% for sub in subdjangit %}
+    <p class="words">{{ sub.title }}<p>
+      &nbsp;<p class="words">r/{{ sub.url }} is moderated by: {{ sub.moderator }}<p>
+      &nbsp; <p class="words">{{ sub.about }}<p>
+      &nbsp;<p class="words">{{ sub.created_at }}<p>
+    </div>
   <br/>
-  <a href="/">Home</a>
-  <a href="/subscribe/{{ sub.url }}">Join</a>
+ 
+  <a href="/subscribe/{{ sub.url }}" class="words">Subscribe</a>
   <div style="display: flex; flex-wrap: wrap; justify-content: space-around">
     {% for post in posts %}
       <div class="card">
@@ -48,12 +91,17 @@
         </form>
         <br/>
         <br/>
+        <a href="/r/{{sub.url}}/post/{{post.id}}/" class="words">Comment</a>
         {% if sub in moderator %}
-          <a href='/deletepost/{{post.id}}/{{sub.url}}/'>Delete</a>
+          <a href='/deletepost/{{post.id}}/{{sub.url}}/' class="words">Delete</a>
         {% endif %}
       </div>
+    
     {% endfor %} 
   </div> 
 {% endfor %} 
+</div>
 
 {% include 'postform.html'%}
+</body>
+</html>

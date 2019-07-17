@@ -1,8 +1,9 @@
 from django.urls import path
 from django.contrib import admin
-
+from djangit.comment.views import Add_comment_to_post
 from djangit.user.views import Homepage, ViewSpecificUserHomepage, AllUsers, ToggleSubscription, DeletePost, DeleteSubdjangit
 from djangit.user.models import DjangitUser
+
 
 admin.site.register(DjangitUser)
 
@@ -16,5 +17,6 @@ urlpatterns = [
     path('deletepost/<int:id>/<str:url>/',
          DeletePost.as_view(), name='deletepost'),
     path('deletesubdjangit/', DeleteSubdjangit.as_view(), name='deletesubdjangit'),
+    
 
 ]
