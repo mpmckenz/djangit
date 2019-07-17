@@ -23,12 +23,13 @@
         transition: 0.3s;
         width: 20%;
         border-radius: 10px;
-        padding: 2%;
+        padding: 8%;
         background-color: #997a6e;
         display: block;
         margin-left: auto;
         margin-right: auto;
         width: 40%;
+
     }
       .card:hover {
         box-shadow: 0 8px 30px 0 rgba(229, 157, 185, 0.2);
@@ -37,7 +38,7 @@
         text-align: center;
         font-family:proxima-nova, sans-serif !important;
         font-style: normal;
-        font-size: 14px;
+        font-size: 15px;
         font-weight:400;
         letter-spacing: 3px;
         color: #231f20;
@@ -84,15 +85,15 @@ img:hover {
     <hr />
       <div class="card">
         <p class="profile">Your Profile</p>
-        <h3>
+        <h3 class="profile">
           <b>{{ request.user.username }}</b>
         </h3>
-        <p>
-          Joined Communities:{% for community in joined_subdjangits %}
+        <p class="profile">
+          Communities you've subscribed to:{% for community in joined_subdjangits %}
           {{ community.title }}, {% endfor %}
         </p>
-        <p>
-          Your Communities: {% for group in currently_moderatoring %}
+        <p class="profile">
+          Your Created communities: {% for group in currently_moderatoring %}
           {{ group }} 
           {%endfor%}
         </p>
