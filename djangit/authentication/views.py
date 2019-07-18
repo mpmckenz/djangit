@@ -31,7 +31,9 @@ class SignUp(View):
                 user.save()
                 DjangitUser.objects.create(
                     user=user,
-                    username=data['username']
+                    username=data['username'],
+                    password=data["password"],
+                    email=data["email"],
                 )
                 login(request, user)
                 return HttpResponseRedirect(reverse("homepage"))
