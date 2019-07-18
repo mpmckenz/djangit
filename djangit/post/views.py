@@ -20,8 +20,11 @@ class CommentonPost(View):
         html = "post.html"
         post_to_comment_on = Post.objects.get(id=id)
 
+        active_user = request.user.djangituser
+        moderator = Subdjangit.objects.all().filter(moderator=active_user)
+
         comments = Comment.objects.filter(post=post_to_comment_on)
-        return render(request, html, {"form": form, "comments": comments, "post_to_comment_on": post_to_comment_on, "id": id})
+        return render(request, html, {"form": form, "comments": comments, "post_to_comment_on": post_to_comment_on, "id": id, "moderator": moderator})
 
     def post(self, request, url, id):
         html = "post.html"
