@@ -7,7 +7,7 @@
     font-family: proxima-nova, sans-serif !important;
     font-style: normal;
     font-size: 14px;
-    font-weight:400;
+    font-weight: 400;
     letter-spacing: 3px;
     color: #231f20;
     text-transform: uppercase;
@@ -16,18 +16,19 @@
     padding: 2px 16px;
 
   }
+
   .communitycontent {
     display: block;
     font-family: proxima-nova, sans-serif !important;
     font-style: normal;
     font-size: 14px;
-    font-weight:400;
+    font-weight: 400;
     letter-spacing: 3px;
     color: #231f20;
     text-transform: uppercase;
     line-height: 1.5em;
     text-align: center;
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     border-radius: 10px;
     margin-top: 2%;
@@ -36,20 +37,22 @@
     margin-right: auto;
     width: 30%;
     background-color: #FBE8A6;
-    
+
 
   }
+
   .subscribe {
     text-align: center;
     font-family: proxima-nova, sans-serif !important;
     font-style: normal;
     font-size: 14px;
-    font-weight:400;
+    font-weight: 400;
     letter-spacing: 3px;
     color: #231f20;
     text-transform: uppercase;
     line-height: 1.5em;
   }
+
   .card {
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
@@ -59,99 +62,104 @@
     background-color: #97CAEF;
 
   }
+
   .card:hover {
     box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
   }
-  
+
   .delete {
     text-align: center;
     font-family: proxima-nova, sans-serif !important;
     font-style: normal;
     font-size: 14px;
-    font-weight:400;
+    font-weight: 400;
     letter-spacing: 3px;
     color: #231f20;
     text-transform: uppercase;
     line-height: 1.5em;
 
   }
+
   .comment {
     text-align: center;
     font-family: proxima-nova, sans-serif !important;
     font-style: normal;
     font-size: 14px;
-    font-weight:400;
+    font-weight: 400;
     letter-spacing: 3px;
     color: #231f20;
     text-transform: uppercase;
     line-height: 1.5em;
 
   }
+
   .words {
     text-align: center;
     font-family: proxima-nova, sans-serif !important;
     font-style: normal;
     font-size: 14px;
-    font-weight:400;
+    font-weight: 400;
     letter-spacing: 3px;
     color: #231f20;
     text-transform: uppercase;
     line-height: 1.5em;
   }
+
   .voting {
-   
+
     display: inline;
     text-align: center;
   }
 </style>
 {% include 'navbar.html' %}
-    
+
 
 <body class="container">
-  <div class="communitycontent"> 
+  <div class="communitycontent">
     <p>Welcome to:</p>
     {% for sub in subdjangit %}
-      <p class="words">{{ sub.title }}<p>
+    <p class="words">{{ sub.title }}<p>
         &nbsp;<p class="words">r/{{ sub.url }} is moderated by: {{ sub.moderator }}<p>
-        &nbsp; <p class="words">{{ sub.about }}<p>
-        &nbsp;<p class="words">{{ sub.created_at }}<p>
-        <a href="/subscribe/{{ sub.url }}" class="subscribe">Subscribe</a>
-      </div>
-      <br/>
-      <div style="display: flex; flex-wrap: wrap; justify-content: space-around">
-        {% for post in posts %}
-          <div class="card">
-            <h3 class="words">{{ post.title }}</h3>
-            <p class="words">{{ post.body }}</p>
-            <!-- <p>url: {{ post.url }}</p> -->
-            <br/>
-            <p class="words">Total: {{ post.vote_score }}</p>
-            <p class="words">Upvotes: {{ post.num_vote_up }}</p>
-            <p class="words">Downvotes: {{ post.num_vote_down }}</p>
-            <form method="post" action="/r/{{sub.url}}/" class="voting">
-              {% csrf_token %}
-              <input type="hidden" value="upvote" name="upvote"></input>
-              <input type="hidden" value="{{ post.id }}" name="upvote"></input>
-              <button type="submit">Upvote</button>
-            </form>
-            <form method="post" action="/r/{{sub.url}}/" class="voting">
-              {% csrf_token %}
-              <input type="hidden" value="downvote" name="downvote"></input>
-              <input type="hidden" value="{{ post.id }}" name="downvote"></input>
-              <button type="submit">Downvote</button>
-            </form>
-            <br/>
-            <br/>
-            <a href="/r/{{sub.url}}/post/{{post.id}}/" class="words">Comment</a>
-            {% if sub in moderator %}
-              <a href='/deletepost/{{post.id}}/{{sub.url}}/' class="delete">Delete</a>
-            {% endif %}
-          </div>
-        {% endfor %} 
-      </div> 
-    {% endfor %} 
+            &nbsp; <p class="words">{{ sub.about }}<p>
+                &nbsp;<p class="words">{{ sub.created_at }}<p>
+                    <a href="/subscribe/{{ sub.url }}" class="subscribe">Subscribe</a>
+  </div>
+  <br />
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-around">
+    {% for post in posts %}
+    <div class="card">
+      <h3 class="words">{{ post.title }}</h3>
+      <p class="words">{{ post.body }}</p>
+      <!-- <p>url: {{ post.url }}</p> -->
+      <br />
+      <p class="words">Total: {{ post.vote_score }}</p>
+      <p class="words">Upvotes: {{ post.num_vote_up }}</p>
+      <p class="words">Downvotes: {{ post.num_vote_down }}</p>
+      <form method="post" action="/r/{{sub.url}}/" class="voting">
+        {% csrf_token %}
+        <input type="hidden" value="upvote" name="upvote"></input>
+        <input type="hidden" value="{{ post.id }}" name="upvote"></input>
+        <button type="submit">Upvote</button>
+      </form>
+      <form method="post" action="/r/{{sub.url}}/" class="voting">
+        {% csrf_token %}
+        <input type="hidden" value="downvote" name="downvote"></input>
+        <input type="hidden" value="{{ post.id }}" name="downvote"></input>
+        <button type="submit">Downvote</button>
+      </form>
+      <br />
+      <br />
+      <a href="/r/{{sub.url}}/post/{{post.id}}/" class="words">Comment</a>
+      {% if sub in moderator %}
+      <a href='/deletepost/{{post.id}}/{{sub.url}}/' class="delete">Delete</a>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
   </div>
 
   {% include 'postform.html'%}
 </body>
+
 </html>

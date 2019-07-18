@@ -24,7 +24,8 @@ class Homepage(View):
 
         joined_subdjangits = active_user.subscriptions.all()
 
-        posts = Post.objects.filter(subdjangit__in=joined_subdjangits)
+        posts = Post.objects.filter(
+            subdjangit__in=joined_subdjangits).order_by('-date_created')
 
         data = {"all_users": all_users, "joined_subdjangits": joined_subdjangits,
                 "currently_moderatoring": currently_moderatoring, "posts": posts, }
