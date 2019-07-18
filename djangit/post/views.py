@@ -19,8 +19,9 @@ class CommentonPost(View):
         form = self.form_class()
         html = "post.html"
         post_to_comment_on = Post.objects.get(id=id)
+
         comments = Comment.objects.filter(post=post_to_comment_on)
-        return render(request, html, {"form": form, "comments": comments, "post_to_comment_on": post_to_comment_on})
+        return render(request, html, {"form": form, "comments": comments, "post_to_comment_on": post_to_comment_on, "id": id})
 
     def post(self, request, url, id):
         html = "post.html"

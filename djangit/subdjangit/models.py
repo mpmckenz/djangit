@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from djangit.user.models import DjangitUser
-from djangit.post.models import Post
+# from djangit.post.models import Post
 
 
 class Subdjangit(models.Model):

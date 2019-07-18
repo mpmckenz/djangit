@@ -24,6 +24,11 @@
     <p class="comment">user: {{ comment.user }}</p>
     <p class="comment">text: {{ comment.text }}</p>
     <p class="comment">created date: {{ comment.created_date }}</p>
+    <a
+      href="/deletecomment/{{ comment.id }}/{{ post_to_comment_on.url }}
+/{{ post_to_comment_on.id }}/"
+      >delete</a
+    >
     <br />
     {% endfor %}
   </body>
