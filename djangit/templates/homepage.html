@@ -59,8 +59,29 @@
         line-height: 1.5em;
 
       }
+      .words {
+        text-align: center;
+        font-family:proxima-nova, sans-serif !important;
+        font-style: normal;
+        font-size: 14px;
+        font-weight:400;
+        letter-spacing: 3px;
+        color:  #261E1E;
+        text-transform: uppercase;
+        line-height: 1.5em;
+
+      }
       .username {
         color: #FBE8A6;
+        text-align: center;
+        font-family:proxima-nova, sans-serif !important;
+        font-style: normal;
+        font-size: 14px;
+        font-weight:400;
+        letter-spacing: 3px;
+        color:  #261E1E;
+        text-transform: uppercase;
+        line-height: 1.5em;
       }
  
     
@@ -78,24 +99,16 @@
     {% include 'navbar.html' %}
     <hr />
     <div class="card">
-      <div container="container">
-        <h3>
-          <b>{{ request.user.username }}</b>
-        </h3>
-        <p>
-          <b>
-            Joined Subdjangits:
-          </b>
+          <p class="words">Hello</p>
+          <p class="username">{{ request.user.username }}</p>
+          <p class="words">Joined Subdjangits:</p>
           {% for community in joined_subdjangits %}
-          <a href="/r/{{ community.url }}/">{{ community.title }}</a
-          >, {% endfor %}
-        </p>
-        <p>
-          <b>Your Subdjangits:</b> {% for group in currently_moderatoring %}
-          <a href="/r/{{ group.url }}/">{{ group.title }}</a
-          >,{%endfor%}
-        </p>
-      </div>
+          <a href="/r/{{ community.url }}/" class="words">{{ community.title }}</a> 
+          {% endfor %}
+          <p class="words">our Subdjangits: </p>
+          {% for group in currently_moderatoring %}
+          <a href="/r/{{ group.url }}/" class="words">{{ group.title }}</a>
+          {%endfor%}
     </div>
     <br />
     {% for item in active_user_posts %}
@@ -114,16 +127,22 @@
       </p>
     </div>
     <br />
-    <h1>Your Feed:</h1>
-    {% for post in active_user_posts %}
-    <p>User: {{ post.subdjangit }}</p>
-    <p>User: {{ post.user }}</p>
-    <p>Title: {{ post.title }}</p>
-    <p>Body: {{ post.body }}</p>
-
+    {% for item in joined_subdjangit_posts %}
+    <div class="card">
+      {% for sub_title in subdjangit_title %}
+      <a href="">{{ sub_title.title }}</a>
+      <br />
+      <a href="/user/{{ item.user }}">{{ item.user }}</a>
+      <p>{{ item.date_created }}</p>
+      <p>
+        <b>{{ item.title }}</b>
+      </p>
+      <p>
+        <i>{{ item.body }}</i>
+      </p>
+    </div>
     <br />
-    {% endfor %}
-    {% endfor %}
+    {% endfor %} {% endfor %} {% endfor %}
   </body>
   <footer class="footer">
     Copyright &copy; 2019 We Be SE3
