@@ -13,8 +13,8 @@ class Post(VoteModel, models.Model):
     subdjangit = models.ForeignKey(
         Subdjangit, on_delete=models.CASCADE)
 
-    def get_score(self):
-        return self.upvotes - self.downvotes
-
     def __str__(self):
         return self.title[:50]
+
+    def get_score(self):
+        return self.upvotes - self.downvotes

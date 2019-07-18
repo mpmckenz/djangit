@@ -16,25 +16,45 @@ class Homepage(View):
 
     def get(self, request):
         html = 'homepage.html'
-
+        # all user button
         all_users = DjangitUser.objects.all()
+
         active_user = request.user.djangituser
+
         currently_moderatoring = Subdjangit.objects.filter(
             moderator=active_user)
-        joined_subdjangits = active_user.subscriptions.all()
         active_user_posts = Post.objects.filter(
             user=active_user).order_by('-date_created')
 
-        # sortby_highest_voted_posts = Post.objects.all().order_by('-upvotes')
-        # sortby_lowest_voted_posts = Post.objects.all().order_by('-downvotes')
-        # sortby_newest_posts = Post.objects.all().order_by('-date_created')
-        # list_of_followed_usernames = logged_in_user_details.following.all()
-        # followed_user_posts = DjangitUser.objects.filter(
-        #     username=username).first()
+        all_subdjangits = Subdjangit.objects.all()
+        active_user_subdjangit_title = []
+        for sub_title in all_subdjangits:
+            active_user_subdjangit_title = Subdjangit.objects.filter(
+                url=sub_title)
+
+        joined_subdjangits = active_user.subscriptions.all()
+        active_user_posts = Post.objects.filter(
+            user=active_user).order_by('-date_created')
         data = {"all_users": all_users, "joined_subdjangits": joined_subdjangits,
                 "currently_moderatoring": currently_moderatoring,
                 "active_user_posts": active_user_posts}
         return render(request, html, data)
+
+    # {% for item in active_user_posts %}
+    # <div class="card">
+    #   {% for user_community in active_user_subdjangit_title %}
+    #   <a href="">{{ user_community.title }}</a>
+    #   {% endfor %}
+    #   <br />
+    #   <a href="/user/{{ item.user }}">{{ item.user }}</a>
+    #   <p>{{ item.date_created }}</p>
+    #   <p>
+    #     <b>{{ item.title }}</b>
+    #   </p>
+    #   <p>
+    #     <i>{{ item.body }}</i>
+    #   </p>
+    # </div>
 
 
 class AllUsers(View):
