@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <style>
-    .container {
-      background-color: #f6f6f6;
+    <style>
+      .container {
+        background-color: #f6f6f6;
     }
     .header {
       text-align: center;
@@ -107,16 +107,16 @@
     {% for item in posts %}
     <div class="card">
       <br />
-      <a href="r/{{ item.url }}">{{ item.title }}</a>
+      <p class="words">Title: <a href="r/{{ item.url }}/post/{{ item.id }}/" class="words">{{ item.title }}</a></p>
+      <br />
+      <p class="words">Community: <a href="r/{{ item.url }}/" class="words">r/{{ item.url }}</a></p>
       <br />
       <br />
-      <a href="/user/{{ item.user }}">{{ item.user }}</a>
-      <p>{{ item.date_created }}</p>
+      <p class="words">{{ item.user }}
+      <p class="words">{{ item.date_created }}</p>
+      
       <p>
-        <b>{{ item.title }}</b>
-      </p>
-      <p>
-        <i>{{ item.body }}</i>
+        <i class="words">{{ item.body }}</i>
       </p>
     </div>
     <br />
