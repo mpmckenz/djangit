@@ -25,13 +25,25 @@ class CommentonPost(View):
     def post(self, request, url, id):
         html = "post.html"
         form = self.form_class(request.POST)
+        if "upvote" in request.POST:
+            comment_thing = int(request.POST.get("upvote"))
+            comment = Comment.objects.get(id=comment_thing)
+            result = comment.votes.up(request.user.id)
+            if not result:
+                comment.votes.delete(request.user.id)
+            return redirect('/r/{}/post/{}'.format(url, id))
+        elif "downvote" in request.POST:
+            comment_thing = int(request.POST.get("downvote"))
+            comment = Comment.objects.get(id=comment_thing)
+            result = comment.votes.down(request.user.id)
+            if not result:
+                comment.votes.delete(request.user.id)
+            return redirect('/r/{}/post/{}'.format(url, id))
         if form.is_valid():
             data = form.cleaned_data
             Comment.objects.create(
                 user=request.user.djangituser,
                 text=data['text'],
                 post=Post.objects.get(id=id)
-
-
             )
             return redirect('/r/{}/post/{}'.format(url, id))
