@@ -57,7 +57,9 @@
       <input type="hidden" value="{{ comment.id }}" name="downvote"></input>
       <button type="submit" class="butt">Downvote</button>
     </form>
+    {% if post_to_comment_on in moderator %}
     <a href="/deletecomment/{{ comment.id }}/{{ post_to_comment_on.url }}/{{ post_to_comment_on.id }}/">delete</a>
+    {% endif %}
     <br />
   {% endfor %}
   </body>
