@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -13,28 +14,58 @@ class Homepage(View):
 
     def get(self, request):
         html = 'homepage.html'
-
+        # all user button
         all_users = DjangitUser.objects.all()
+
         active_user = request.user.djangituser
+
         currently_moderatoring = Subdjangit.objects.filter(
             moderator=active_user)
+        active_user_posts = Post.objects.filter(
+            user=active_user).order_by('-date_created')
+
+        all_subdjangits = Subdjangit.objects.all()
+        active_user_subdjangit_title = []
+        for sub_title in all_subdjangits:
+            active_user_subdjangit_title = Subdjangit.objects.filter(
+                url=sub_title)
+
         joined_subdjangits = active_user.subscriptions.all()
+        for community in joined_subdjangits:
+            joined_subdjangit_posts = Post.objects.filter(
+                url=community)
+            subdjangit_title = Subdjangit.objects.filter(url=community)
         # sortby_highest_voted_posts = Post.objects.all().order_by('-upvotes')
 
         # sortby_lowest_voted_posts = Post.objects.all().order_by('-downvotes')
 
-        # sortby_newest_posts = Post.objects.all().order_by('-date_created')
+        # sortby_newest_posts = Post.objects.filter(
+        #     user=active_user).order_by('-date_created')
 
         # list_of_followed_usernames = logged_in_user_details.following.all()
 
         # followed_user_posts = DjangitUser.objects.filter(
         #     username=username).first()
 
-        # data = {'followed_user_posts': followed_user_posts,
-        # 'logged_in_user_details': logged_in_user_details, 'list_of_followed_usernames': list_of_followed_usernames}
-        data = {"all_users": all_users, "joined_subdjangits": joined_subdjangits,
-                "currently_moderatoring": currently_moderatoring}
+        data = {"joined_subdjangits": joined_subdjangits,
+                "currently_moderatoring": currently_moderatoring, "active_user_posts": active_user_posts, "joined_subdjangit_posts": joined_subdjangit_posts, "subdjangit_title": subdjangit_title, "active_user_subdjangit_title": active_user_subdjangit_title}
         return render(request, html, data)
+
+    # {% for item in active_user_posts %}
+    # <div class="card">
+    #   {% for user_community in active_user_subdjangit_title %}
+    #   <a href="">{{ user_community.title }}</a>
+    #   {% endfor %}
+    #   <br />
+    #   <a href="/user/{{ item.user }}">{{ item.user }}</a>
+    #   <p>{{ item.date_created }}</p>
+    #   <p>
+    #     <b>{{ item.title }}</b>
+    #   </p>
+    #   <p>
+    #     <i>{{ item.body }}</i>
+    #   </p>
+    # </div>
 
 
 class AllUsers(View):

@@ -12,3 +12,6 @@ class Post(VoteModel, models.Model):
 
     def __str__(self):
         return self.title[:50]
+
+    def get_score(self):
+        return self.upvotes - self.downvotes

@@ -20,9 +20,11 @@
     transition: 0.3s;
     border-radius: 10px;
     padding: 2%;
+    margin-top: 3%;
     margin-left: auto;
     margin-right: auto;
     width: 30%;
+    background-color: #FBE8A6;
   }
   
   .title {
@@ -34,13 +36,13 @@
     letter-spacing: 3px;
     color: #231f20;
     text-transform: uppercase;
-   
+    
 
   }
 </style>
 <body class="container">
-<h1 class="title">Got something to say?</h1>
 <form action="" method="post" class="form">
+    <h1 class="title">Create a post</h1>
   {%csrf_token %}
   {{ form.as_p }}
   <input type="submit" value="Submit" />

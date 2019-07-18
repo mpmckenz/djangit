@@ -3,31 +3,60 @@
   <style>
     .container {
       background-color: #f6f6f6;
+      text-align: center;
+      font-family:proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 20px;
+      font-weight:400;
+      letter-spacing: 3px;
+      color:  #261E1E;
+      text-transform: uppercase;
+      line-height: 1.5em;
     }
     .header {
       text-align: center;
-      color: #f6a2a2;
-      font-family: Georgia, sans-serif;
+      color: #261E1E;
+      text-align: center;
+      font-family:proxima-nova, sans-serif !important;
       font-style: normal;
-      font-size: 25px;
-      font-weight: 400;
+      font-size: 20px;
+      font-weight:400;
       letter-spacing: 3px;
+      color:  #261E1E;
+      text-transform: uppercase;
+      line-height: 1.5em;
+    }
+    .words {
+      text-align: center;
+      color: #261E1E;
+      text-align: center;
+      font-family:proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 20px;
+      font-weight:400;
+      letter-spacing: 3px;
+      color:  #261E1E;
+      text-transform: uppercase;
+      line-height: 1.5em;
+
+    }
+    .navbar {
+      text-align: center;
+      color: #261E1E;
+      text-align: center;
+      font-family:proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 20px;
+      font-weight:400;
+      letter-spacing: 3px;
+      color:  #261E1E;
       text-transform: uppercase;
       line-height: 1.5em;
     }
 
-    .navbar {
-      text-align: center;
-      font-family: proxima-nova, sans-serif !important;
-      font-style: normal;
-      font-size: 16px;
-      font-weight: 400;
-      letter-spacing: 3px;
-      color: #231f20;
-      text-transform: uppercase;
-      line-height: 1.5em;
-    }
+    
   </style>
+{% include 'navbar.html' %}
   <body class="container">
     <center>
       <h1 class="header">Oops!</h1>
@@ -35,7 +64,7 @@
         {{ request.user.username }}, your entry was invalid!
       </h2>
       <p>
-        <i>
+        <i class="words">
           When you customize your unique url path, please make sure there are no
           spaces!
         </i>
