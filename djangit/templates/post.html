@@ -2,8 +2,7 @@
 <html>
   <style>
     .comment {
-      background-color: #f6f6f6;
-      color: #231f20;
+     
       font-family: proxima-nova, sans-serif !important;
       font-style: normal;
       font-size: 14px;
@@ -15,9 +14,8 @@
       margin:0 auto;
     }
     .container {
-      background-color: #f6f6f6;
+  
       text-align: center;
-      color: #231f20;
       font-family: proxima-nova, sans-serif !important;
       font-style: normal;
       font-size: 14px;
@@ -28,17 +26,30 @@
       line-height: 1.5em;
       margin:0 auto;
     }
+    .form {
+      
+      color: #231f20;
+      font-family: proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 14px;
+      font-weight:400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 1.5em;
+      margin:0 auto;
+    }
   </style>
 {% include 'navbar.html' %}
-
-<body class="container">
-  <p>title: {{ post_to_comment_on.title }}</p>
-  <p>body: {{ post_to_comment_on.body }}</p>
-  <p>Community: <a href="/r/{{post_to_comment_on.url}}/">r/{{ post_to_comment_on.url }}</a></p>
-  <br />
-  <br />
   {% include 'comment.html' %}
-  <h2>COMMENTS</h2>
+  <br /> 
+  <br />
+  <br />
+  <body class="container">
+      <form action="" method="post" class="form">
+      <p>title: {{ post_to_comment_on.title }}</p>
+      <p>body: {{ post_to_comment_on.body }}</p>
+      <p>Community: <a href="/r/{{post_to_comment_on.url}}/">r/{{ post_to_comment_on.url }}</a></p>
+    </form>
   {% for comment in comments %}
     <p class="comment">{{ comment.user }}'s Comment @ {{ comment.created_date }}</p>
     <p class="comment">{{ comment.text }}</p>
