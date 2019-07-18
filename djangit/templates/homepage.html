@@ -4,9 +4,8 @@
   .container {
     background-color: #f6f6f6;
   }
-
-  .header {
-    text-align: center;
+    .header {
+      text-align: center;
 
     color: #fc4445;
     font-family: Georgia, sans-serif;
@@ -115,7 +114,21 @@
   {% for item in posts %}
   <div class="card">
     <br />
-    <a href="r/{{ item.url }}">{{ item.title }}</a>
+    {% for item in posts %}
+    <div class="card">
+      <br />
+      <p class="words">Title: <a href="r/{{ item.url }}/post/{{ item.id }}/" class="words">{{ item.title }}</a></p>
+      <br />
+      <p class="words">Community: <a href="r/{{ item.url }}/" class="words">r/{{ item.url }}</a></p>
+      <br />
+      <br />
+      <p class="words">{{ item.user }}
+      <p class="words">{{ item.date_created }}</p>
+      
+      <p>
+        <i class="words">{{ item.body }}</i>
+      </p>
+    </div>
     <br />
     <br />
     <a href="/user/{{ item.user }}">{{ item.user }}</a>
