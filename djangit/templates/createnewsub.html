@@ -1,19 +1,28 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!DOCTYPE html>
+<html>
+  <style>
+    .container {
+      background-color: #f6f6f6;
+      text-align: center;
+      font-family:proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 14px;
+      font-weight:400;
+      letter-spacing: 3px;
+      color: #231f20;
+      text-transform: uppercase;
+      line-height: 1.5em;
+    }
+  </style>
+  {% include 'navbar.html' %}
  <h1>SubDjangits</h1>
- {% include 'navbar.html' %}
- <br>
- <br>
- <div class="card add-subk-wrap">
-   <div class="card-header">
-     <h3>Create a new Community</h3>
-     <div class='container'>
-       <form class='sub-form' method='post'>
-           {{%csrf_token %}
-           {{ form.as_p }}
-           <input type="submit" value="Submit" />
 
-       </form>
-     </div>
+ <h3>Create a new Community</h3>
+     <form class='sub-form' method='post'>
+        {{%csrf_token %}
+        {{ form.as_p }}
+      <input type="submit" value="Submit" />
 
-     </div>
- </div>
+    </form>
+ 
+ </html>

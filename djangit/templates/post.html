@@ -2,10 +2,31 @@
 <html>
   <style>
     .comment {
+      background-color: #f6f6f6;
       color: #231f20;
+      font-family: proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 14px;
+      font-weight:400;
+      letter-spacing: 3px;
+      color: #231f20;
+      text-transform: uppercase;
+      line-height: 1.5em;
+      margin:0 auto;
     }
     .container {
+      background-color: #f6f6f6;
       text-align: center;
+      color: #231f20;
+      font-family: proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 14px;
+      font-weight:400;
+      letter-spacing: 3px;
+      color: #231f20;
+      text-transform: uppercase;
+      line-height: 1.5em;
+      margin:0 auto;
     }
   </style>
 
@@ -19,7 +40,7 @@
     <h2>COMMENT</h2>
     {% for comment in comments %}
     <p>
-      Comment belong to this post: <b>{{ comment.post }}</b>
+      Comment belongs to this post: <b>{{ comment.post }}</b>
     </p>
     <p class="comment">user: {{ comment.user }}</p>
     <p class="comment">text: {{ comment.text }}</p>
