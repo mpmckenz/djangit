@@ -10,8 +10,5 @@ class Post(VoteModel, models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     url = models.CharField(max_length=200)
 
-    def get_score(self):
-        return self.upvotes - self.downvotes
-
     def __str__(self):
         return self.title[:50]

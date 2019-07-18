@@ -87,54 +87,53 @@
 
   }
 </style>
-<body class="container">
-{% include 'navbar.html' %}
 
-    <div class="communitycontent"> 
+<body class="container">
+  {% include 'navbar.html' %}
+  <div class="communitycontent"> 
     <p>Welcome to:</p>
     {% for sub in subdjangit %}
-    <p class="words">{{ sub.title }}<p>
-      &nbsp;<p class="words">r/{{ sub.url }} is moderated by: {{ sub.moderator }}<p>
-      &nbsp; <p class="words">{{ sub.about }}<p>
-      &nbsp;<p class="words">{{ sub.created_at }}<p>
-      <a href="/subscribe/{{ sub.url }}" class="subscribe">Subscribe</a>
-    </div>
-  <br/>
-  <div style="display: flex; flex-wrap: wrap; justify-content: space-around">
-    {% for post in posts %}
-      <div class="card">
-        <h3><strong>{{ post.title }}</strong></h3>
-        <p>{{ post.body }}</p>
-        <!-- <p>url: {{ post.url }}</p> -->
-        <br/>
-        <p>Total: {{ post.vote_score }}</p>
-        <p>Upvotes: {{ post.num_vote_up }}</p>
-        <p>Downvotes: {{ post.num_vote_down }}</p>
-        <form method="post" action="/r/{{sub.url}}/" style="display: inline">
-          {% csrf_token %}
-          <input type="hidden" value="upvote" name="upvote"></input>
-          <input type="hidden" value="{{ post.id }}" name="upvote"></input>
-          <button type="submit" class="butt">Upvote</button>
-        </form>
-        <form method="post" action="/r/{{sub.url}}/" style="display: inline">
-          {% csrf_token %}
-          <input type="hidden" value="downvote" name="downvote"></input>
-          <input type="hidden" value="{{ post.id }}" name="downvote"></input>
-          <button type="submit" class="butt">Downvote</button>
-        </form>
-        <br/>
-        <br/>
-        <a href="/r/{{sub.url}}/post/{{post.id}}/" class="words">Comment</a>
-        {% if sub in moderator %}
-          <a href='/deletepost/{{post.id}}/{{sub.url}}/' class="delete">Delete</a>
-        {% endif %}
+      <p class="words">{{ sub.title }}<p>
+        &nbsp;<p class="words">r/{{ sub.url }} is moderated by: {{ sub.moderator }}<p>
+        &nbsp; <p class="words">{{ sub.about }}<p>
+        &nbsp;<p class="words">{{ sub.created_at }}<p>
+        <a href="/subscribe/{{ sub.url }}" class="subscribe">Subscribe</a>
       </div>
-    
+      <br/>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-around">
+        {% for post in posts %}
+          <div class="card">
+            <h3><strong>{{ post.title }}</strong></h3>
+            <p>{{ post.body }}</p>
+            <!-- <p>url: {{ post.url }}</p> -->
+            <br/>
+            <p>Total: {{ post.vote_score }}</p>
+            <p>Upvotes: {{ post.num_vote_up }}</p>
+            <p>Downvotes: {{ post.num_vote_down }}</p>
+            <form method="post" action="/r/{{sub.url}}/" style="display: inline">
+              {% csrf_token %}
+              <input type="hidden" value="upvote" name="upvote"></input>
+              <input type="hidden" value="{{ post.id }}" name="upvote"></input>
+              <button type="submit" class="butt">Upvote</button>
+            </form>
+            <form method="post" action="/r/{{sub.url}}/" style="display: inline">
+              {% csrf_token %}
+              <input type="hidden" value="downvote" name="downvote"></input>
+              <input type="hidden" value="{{ post.id }}" name="downvote"></input>
+              <button type="submit" class="butt">Downvote</button>
+            </form>
+            <br/>
+            <br/>
+            <a href="/r/{{sub.url}}/post/{{post.id}}/" class="words">Comment</a>
+            {% if sub in moderator %}
+              <a href='/deletepost/{{post.id}}/{{sub.url}}/' class="delete">Delete</a>
+            {% endif %}
+          </div>
+        {% endfor %} 
+      </div> 
     {% endfor %} 
-  </div> 
-{% endfor %} 
-</div>
+  </div>
 
-{% include 'postform.html'%}
+  {% include 'postform.html'%}
 </body>
 </html>

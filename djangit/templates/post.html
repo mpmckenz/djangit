@@ -8,22 +8,37 @@
       text-align: center;
     }
   </style>
+{% include 'navbar.html' %}
 
+<body class="container">
+  <p>title: {{ post_to_comment_on.title }}</p>
+  <p>body: {{ post_to_comment_on.body }}</p>
+  <p>Community: <a href="/r/{{post_to_comment_on.url}}/">r/{{ post_to_comment_on.url }}</a></p>
+  <br />
+  <br />
   {% include 'comment.html' %}
-  <body class="container">
-    <p>title: {{ post_to_comment_on.title }}</p>
-    <p>body: {{ post_to_comment_on.body }}</p>
-    <p>url: {{ post_to_comment_on.url }}</p>
-    <br />
-    <br />
-    <h2>COMMENT</h2>
+    <h2>COMMENTS</h2>
     {% for comment in comments %}
-    <p>
-      Comment belong to this post: <b>{{ comment.post }}</b>
-    </p>
-    <p class="comment">user: {{ comment.user }}</p>
-    <p class="comment">text: {{ comment.text }}</p>
-    <p class="comment">created date: {{ comment.created_date }}</p>
+    <!-- <p>
+      Comment belongs to this post: <b>{{ comment.post }}</b>
+    </p> -->
+    <p class="comment">{{ comment.user }}'s Comment @ {{ comment.created_date }}</p>
+    <p class="comment">{{ comment.text }}</p>
+    <p>Total: {{ comment.vote_score }}</p>
+    <p>Upvotes: {{ comment.num_vote_up }}</p>
+    <p>Downvotes: {{ comment.num_vote_down }}</p>
+    <form method="post" action="/r/{{post_to_comment_on.url}}/post/{{post_to_comment_on.id}}/" style="display: inline">
+      {% csrf_token %}
+      <input type="hidden" value="upvote" name="upvote"></input>
+      <input type="hidden" value="{{ comment.id }}" name="upvote"></input>
+      <button type="submit" class="butt">Upvote</button>
+    </form>
+    <form method="post" action="/r/{{post_to_comment_on.url}}/post/{{post_to_comment_on.id}}/" style="display: inline">
+      {% csrf_token %}
+      <input type="hidden" value="downvote" name="downvote"></input>
+      <input type="hidden" value="{{ comment.id }}" name="downvote"></input>
+      <button type="submit" class="butt">Downvote</button>
+    </form>
     <br />
     {% endfor %}
   </body>
