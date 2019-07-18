@@ -98,9 +98,14 @@
     text-transform: uppercase;
     line-height: 1.5em;
   }
+  .voting {
+   
+    display: inline;
+    text-align: center;
+  }
 </style>
 {% include 'navbar.html' %}
-<body class="container">
+    
 
 <body class="container">
   <div class="communitycontent"> 
@@ -116,24 +121,24 @@
       <div style="display: flex; flex-wrap: wrap; justify-content: space-around">
         {% for post in posts %}
           <div class="card">
-            <h3><strong>{{ post.title }}</strong></h3>
-            <p>{{ post.body }}</p>
+            <h3 class="words">{{ post.title }}</h3>
+            <p class="words">{{ post.body }}</p>
             <!-- <p>url: {{ post.url }}</p> -->
             <br/>
-            <p>Total: {{ post.vote_score }}</p>
-            <p>Upvotes: {{ post.num_vote_up }}</p>
-            <p>Downvotes: {{ post.num_vote_down }}</p>
-            <form method="post" action="/r/{{sub.url}}/" style="display: inline">
+            <p class="words">Total: {{ post.vote_score }}</p>
+            <p class="words">Upvotes: {{ post.num_vote_up }}</p>
+            <p class="words">Downvotes: {{ post.num_vote_down }}</p>
+            <form method="post" action="/r/{{sub.url}}/" class="voting">
               {% csrf_token %}
               <input type="hidden" value="upvote" name="upvote"></input>
               <input type="hidden" value="{{ post.id }}" name="upvote"></input>
-              <button type="submit" class="butt">Upvote</button>
+              <button type="submit">Upvote</button>
             </form>
-            <form method="post" action="/r/{{sub.url}}/" style="display: inline">
+            <form method="post" action="/r/{{sub.url}}/" class="voting">
               {% csrf_token %}
               <input type="hidden" value="downvote" name="downvote"></input>
               <input type="hidden" value="{{ post.id }}" name="downvote"></input>
-              <button type="submit" class="butt">Downvote</button>
+              <button type="submit">Downvote</button>
             </form>
             <br/>
             <br/>
