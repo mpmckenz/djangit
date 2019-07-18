@@ -7,6 +7,7 @@
       .header {
         text-align: center;
         
+        
         color: #FC4445;
         font-family: Georgia, sans-serif;
         font-style: normal;
@@ -112,7 +113,9 @@
     {% for item in posts %}
     <div class="card">
       <br />
-      <a href="r/{{ item.url }}" class="words">{{ item.title }}</a>
+      <p class="words">Title: <a href="r/{{ item.url }}/post/{{ item.id }}/" class="words">{{ item.title }}</a></p>
+      <br />
+      <p class="words">Community: <a href="r/{{ item.url }}/" class="words">r/{{ item.url }}</a></p>
       <br />
       <br />
       <p class="words">{{ item.user }}
