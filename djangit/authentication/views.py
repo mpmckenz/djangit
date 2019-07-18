@@ -18,25 +18,32 @@ class SignUp(View):
         return render(request, self.html, {"form": form})
 
     def post(self, request):
+        badsignup_username = 'badsignupusername.html'
+        badsignup_email = 'badsignupemail.html'
         form = None
         if request.method == "POST":
             form = SignupForm(request.POST)
             if form.is_valid():
                 data = form.cleaned_data
-                user = User.objects.create_user(
-                    username=data["username"],
-                    email=data["email"],
-                    password=data["password"],
-                )
-                user.save()
-                DjangitUser.objects.create(
-                    user=user,
-                    username=data['username'],
-                    password=data["password"],
-                    email=data["email"],
-                )
-                login(request, user)
-                return HttpResponseRedirect(reverse("homepage"))
+                if User.objects.filter(username=data['username']):
+                    return render(request, badSignup_username)
+                if User.objects.filter(email=data['email']):
+                    return render(request, badsignup_email)
+                else:
+                    user = User.objects.create_user(
+                        username=data["username"],
+                        email=data["email"],
+                        password=data["password"],
+                    )
+                    user.save()
+                    DjangitUser.objects.create(
+                        user=user,
+                        username=data['username'],
+                        password=data["password"],
+                        email=data["email"],
+                    )
+                    login(request, user)
+                    return HttpResponseRedirect(reverse("homepage"))
 
 
 class Login(View):
