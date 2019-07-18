@@ -110,10 +110,7 @@
     <a href="/r/{{ group.url }}/" class="words">{{ group.title }}</a>
     {%endfor%}
   </div>
-  <br />
-  {% for item in posts %}
-  <div class="card">
-    <br />
+ 
     {% for item in posts %}
     <div class="card">
       <br />
@@ -129,18 +126,7 @@
         <i class="words">{{ item.body }}</i>
       </p>
     </div>
-    <br />
-    <br />
-    <a href="/user/{{ item.user }}">{{ item.user }}</a>
-    <p>{{ item.date_created }}</p>
-    <p>
-      <b>{{ item.title }}</b>
-    </p>
-    <p>
-      <i>{{ item.body }}</i>
-    </p>
-  </div>
-  <br />
+  
   {% endfor %}
 </body>
 <footer class="footer">
