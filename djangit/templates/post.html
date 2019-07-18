@@ -40,14 +40,6 @@
   {% include 'comment.html' %}
     <h2>COMMENTS</h2>
     {% for comment in comments %}
-<<<<<<< HEAD
-    <p>
-      Comment belongs to this post: <b>{{ comment.post }}</b>
-    </p>
-    <p class="comment">user: {{ comment.user }}</p>
-    <p class="comment">text: {{ comment.text }}</p>
-    <p class="comment">created date: {{ comment.created_date }}</p>
-=======
     <!-- <p>
       Comment belongs to this post: <b>{{ comment.post }}</b>
     </p> -->
@@ -68,7 +60,6 @@
       <input type="hidden" value="{{ comment.id }}" name="downvote"></input>
       <button type="submit" class="butt">Downvote</button>
     </form>
->>>>>>> 8843f09120d9cdeee913da646203442f06bd26bf
     <br />
     {% endfor %}
   </body>
