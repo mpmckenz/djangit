@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib import admin
 from djangit.comment.views import Add_comment_to_post
-from djangit.user.views import Homepage, ViewSpecificUserHomepage, AllUsers, ToggleSubscription, DeletePost, DeleteSubdjangit
+from djangit.user.views import Homepage, ViewSpecificUserHomepage, AllUsers, ToggleSubscription, DeletePost, DeleteSubdjangit, DeleteComment
 from djangit.user.models import DjangitUser
 
 
@@ -16,7 +16,6 @@ urlpatterns = [
     path("subscribe/<str:url>/", ToggleSubscription.as_view()),
     path('deletepost/<int:id>/<str:url>/',
          DeletePost.as_view(), name='deletepost'),
-    path('deletesubdjangit/', DeleteSubdjangit.as_view(), name='deletesubdjangit'),
-    
-
+    path('deletecomment/<int:cid>/<str:url>/<int:id>/',
+         DeleteComment.as_view(), name='deletecomment'),
 ]

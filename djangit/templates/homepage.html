@@ -114,28 +114,16 @@
       </p>
     </div>
     <br />
-    {% for item in joined_subdjangit_posts %}
-    <div class="card">
-      {% for sub_title in subdjangit_title %}
-      <a href="">{{ sub_title.title }}</a>
-      <br />
-      <a href="/user/{{ item.user }}">{{ item.user }}</a>
-      <p>{{ item.date_created }}</p>
-      <p>
-        <b>{{ item.title }}</b>
-      </p>
-      <p>
-        <i>{{ item.body }}</i>
-      </p>
-    </div>
+    <h1>Your Feed:</h1>
+    {% for post in active_user_posts %}
+    <p>User: {{ post.subdjangit }}</p>
+    <p>User: {{ post.user }}</p>
+    <p>Title: {{ post.title }}</p>
+    <p>Body: {{ post.body }}</p>
+
     <br />
-<<<<<<< HEAD
-    <br />
-    <br />
-    <br />
-=======
-    {% endfor %} {% endfor %} {% endfor %}
->>>>>>> b1e6b8d442e299220b5cb77b9e916e29474321dd
+    {% endfor %}
+    {% endfor %}
   </body>
   <footer class="footer">
     Copyright &copy; 2019 We Be SE3

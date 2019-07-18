@@ -66,6 +66,7 @@ class SingleSubdjangit(View):
                 url='{}'.format(url),
                 title=data['title'],
                 body=data['body'],
+                subdjangit=Subdjangit.objects.get(url=url),
             )
             subdjangit_posts = Subdjangit.objects.filter(url=url)
             posts = Post.objects.all()
@@ -108,6 +109,8 @@ class CreateSubdjangit(View):
             data = form.cleaned_data
             if Subdjangit.objects.filter(url=data['url']):
                 return HttpResponseRedirect('/r/{}/'.format(data['url']))
+            if Subdjangit.objects.filter(title=data['title']):
+                return render(request, "cannotcreatesubdjangit.html", {"form": form})
             else:
                 if " " not in data['url']:
                     Subdjangit.objects.create(

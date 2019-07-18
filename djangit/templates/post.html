@@ -38,11 +38,8 @@
   <br />
   <br />
   {% include 'comment.html' %}
-    <h2>COMMENTS</h2>
-    {% for comment in comments %}
-    <!-- <p>
-      Comment belongs to this post: <b>{{ comment.post }}</b>
-    </p> -->
+  <h2>COMMENTS</h2>
+  {% for comment in comments %}
     <p class="comment">{{ comment.user }}'s Comment @ {{ comment.created_date }}</p>
     <p class="comment">{{ comment.text }}</p>
     <p>Total: {{ comment.vote_score }}</p>
@@ -60,7 +57,8 @@
       <input type="hidden" value="{{ comment.id }}" name="downvote"></input>
       <button type="submit" class="butt">Downvote</button>
     </form>
+    <a href="/deletecomment/{{ comment.id }}/{{ post_to_comment_on.url }}/{{ post_to_comment_on.id }}/">delete</a>
     <br />
-    {% endfor %}
+  {% endfor %}
   </body>
 </html>

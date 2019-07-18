@@ -10,5 +10,6 @@ admin.site.register(Post)
 
 
 urlpatterns = [
-    path("r/<str:url>/post/<int:id>/", CommentonPost.as_view())
+    path("r/<str:url>/post/<int:id>/",
+         CommentonPost.as_view(), name='commentonpost')
 ]

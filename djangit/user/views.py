@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from djangit.user.models import DjangitUser
 from djangit.post.models import Post
 from djangit.subdjangit.models import Subdjangit
+from djangit.comment.models import Comment
 
 
 @method_decorator(login_required, name='dispatch')
@@ -31,24 +33,11 @@ class Homepage(View):
                 url=sub_title)
 
         joined_subdjangits = active_user.subscriptions.all()
-        for community in joined_subdjangits:
-            joined_subdjangit_posts = Post.objects.filter(
-                url=community)
-            subdjangit_title = Subdjangit.objects.filter(url=community)
-        # sortby_highest_voted_posts = Post.objects.all().order_by('-upvotes')
-
-        # sortby_lowest_voted_posts = Post.objects.all().order_by('-downvotes')
-
-        # sortby_newest_posts = Post.objects.filter(
-        #     user=active_user).order_by('-date_created')
-
-        # list_of_followed_usernames = logged_in_user_details.following.all()
-
-        # followed_user_posts = DjangitUser.objects.filter(
-        #     username=username).first()
-
-        data = {"joined_subdjangits": joined_subdjangits,
-                "currently_moderatoring": currently_moderatoring, "active_user_posts": active_user_posts, "joined_subdjangit_posts": joined_subdjangit_posts, "subdjangit_title": subdjangit_title, "active_user_subdjangit_title": active_user_subdjangit_title}
+        active_user_posts = Post.objects.filter(
+            user=active_user).order_by('-date_created')
+        data = {"all_users": all_users, "joined_subdjangits": joined_subdjangits,
+                "currently_moderatoring": currently_moderatoring,
+                "active_user_posts": active_user_posts}
         return render(request, html, data)
 
     # {% for item in active_user_posts %}
@@ -116,6 +105,17 @@ class DeletePost(View):
         if moderator:
             Post.objects.filter(id=id).delete()
         return redirect("/r/{}".format(url))
+
+
+class DeleteComment(View):
+    """moderator of a subdjangit can delete comments on a post"""
+
+    def get(self, request, cid, url, id):
+        active_user = request.user.djangituser
+        moderator = Subdjangit.objects.filter(moderator=active_user)
+        if moderator:
+            Comment.objects.filter(id=cid).delete()
+        return HttpResponseRedirect(reverse("commentonpost", args=(url, id)))
 
 
 class DeleteSubdjangit(View):
