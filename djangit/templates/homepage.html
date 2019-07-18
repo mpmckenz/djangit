@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html>
-  
     <style>
       .container {
         background-color: #f6f6f6;
@@ -32,7 +30,6 @@
         margin-right: auto;
         width: 40%;
         border-color:  #BC4123;
-
     }
       .card:hover {
         box-shadow: 0 8px 30px 0 rgba(229, 157, 185, 0.2);
@@ -112,11 +109,11 @@
           {%endfor%}
     </div>
     <br />
-    {% for item in active_user_posts %}
+    {% for item in posts %}
     <div class="card">
-      {% for user_community in active_user_subdjangit_title %}
-      <a href="">{{ user_community.title }}</a>
-      {% endfor %}
+      <br />
+      <a href="r/{{ item.url }}">{{ item.url }}</a>
+      <br />
       <br />
       <a href="/user/{{ item.user }}">{{ item.user }}</a>
       <p>{{ item.date_created }}</p>
@@ -128,22 +125,7 @@
       </p>
     </div>
     <br />
-    {% for item in joined_subdjangit_posts %}
-    <div class="card">
-      {% for sub_title in subdjangit_title %}
-      <a href="">{{ sub_title.title }}</a>
-      <br />
-      <a href="/user/{{ item.user }}">{{ item.user }}</a>
-      <p>{{ item.date_created }}</p>
-      <p>
-        <b>{{ item.title }}</b>
-      </p>
-      <p>
-        <i>{{ item.body }}</i>
-      </p>
-    </div>
-    <br />
-    {% endfor %} {% endfor %} {% endfor %}
+    {% endfor %}
   </body>
   <footer class="footer">
     Copyright &copy; 2019 We Be SE3
