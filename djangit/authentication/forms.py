@@ -12,4 +12,3 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = DjangitUser
         fields = ["username", "password"]
-        # Why isn't the password using the widget guys? We had it that way
