@@ -5,7 +5,6 @@ from django.conf.urls import url, include
 from djangit.comment.views import Add_comment_to_post
 
 
-
 admin.site.register(Comment)
 
 

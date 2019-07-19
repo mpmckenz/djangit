@@ -8,12 +8,8 @@ from djangit.subdjangit.models import Subdjangit
 
 
 class CommentonPost(View):
-    # we don't want the id of the comment but we want the id of the post
     """Creates a post under to current Subdjangit Community"""
     form_class = CommentForm
-# We need to see the original post and all the current comments on it
-# It's not showing all the comment on the post
-# Not showing date created
 
     def get(self, request, url, id):
         form = self.form_class()

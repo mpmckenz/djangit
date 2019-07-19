@@ -30,12 +30,12 @@
   {% include 'navbar.html' %}
  <h1>SubDjangits</h1>
 
- <h3>Create a new Community</h3>
-     <form class='sub-form' method='post'>
+    {% include 'navbar.html' %}
+    <h1>SubDjangits</h1>
+    <h3>Create a new Community</h3>
+    <form class="sub-form" method="post">
         {{%csrf_token %}
         {{ form.as_p }}
-      <input type="submit" value="Submit" />
-
+        <input type="submit" value="Submit" />
     </form>
- 
- </html>
+</html>
