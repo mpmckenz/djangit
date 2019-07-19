@@ -38,6 +38,12 @@
       line-height: 1.5em;
       margin:0 auto;
     }
+  input:hover{
+	  cursor: pointer;
+}
+  button:hover{
+	  cursor: pointer;
+}
   </style>
 {% include 'navbar.html' %}
   {% include 'comment.html' %}
@@ -46,9 +52,9 @@
   <br />
   <body class="container">
       <form action="" method="post" class="form">
-      <p>title: {{ post_to_comment_on.title }}</p>
-      <p>body: {{ post_to_comment_on.body }}</p>
-      <p>Community: <a href="/r/{{post_to_comment_on.url}}/">r/{{ post_to_comment_on.url }}</a></p>
+      <p class="comment">title: {{ post_to_comment_on.title }}</p>
+      <p class="comment">body: {{ post_to_comment_on.body }}</p>
+      <p class="comment">Community: <a href="/r/{{post_to_comment_on.url}}/">r/{{ post_to_comment_on.url }}</a></p>
     </form>
   {% for comment in comments %}
     <p class="comment">{{ comment.user }}'s Comment @ {{ comment.created_date }}</p>

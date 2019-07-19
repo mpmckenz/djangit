@@ -1,78 +1,83 @@
 <!DOCTYPE html>
 <html>
-    <style>
-        .container {
-            background-color: #f6f6f6;
-            text-align: center;
-            font-family: proxima-nova, sans-serif !important;
-            font-style: normal;
-            font-size: 20px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            color: #261e1e;
-            text-transform: uppercase;
-            line-height: 1.5em;
-        }
-        .header {
-            text-align: center;
-            color: #261e1e;
-            text-align: center;
-            font-family: proxima-nova, sans-serif !important;
-            font-style: normal;
-            font-size: 20px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            color: #261e1e;
-            text-transform: uppercase;
-            line-height: 1.5em;
-        }
-        .words {
-            text-align: center;
-            color: #261e1e;
-            text-align: center;
-            font-family: proxima-nova, sans-serif !important;
-            font-style: normal;
-            font-size: 20px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            color: #261e1e;
-            text-transform: uppercase;
-            line-height: 1.5em;
-        }
-        .navbar {
-            text-align: center;
-            color: #261e1e;
-            text-align: center;
-            font-family: proxima-nova, sans-serif !important;
-            font-style: normal;
-            font-size: 20px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            color: #261e1e;
-            text-transform: uppercase;
-            line-height: 1.5em;
-        }
-    </style>
-    {% include 'navbar.html' %}
-    <body class="container">
-        <center>
-            <h1 class="header">Oops!</h1>
-            <h2 class="header">
-                {{ request.user.username }}, your entry was invalid!
-            </h2>
-            <p>
-                <i class="words">When you customize your <b><u>unique url path</u></b>, please make sure there are <b><u>no spaces</u></b>!</i>
-            </p>
-            <br />
-            <p>
-                <i>Also, make sure you have a <b><u>unique community title</u></b>.</i>
-            </p>
-            <br />
-            <br />
-            <a class="navbar" href="/createsubdjangit/">Try again</a>
-            <br />
-            <br />
-            <a class="navbar" href="/">Home</a>
-        </center>
-    </body>
+  <style>
+    .container {
+      background-color: #00ccff;
+      text-align: center;
+      font-family:proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 20px;
+      font-weight:400;
+      letter-spacing: 3px;
+      color:  #261E1E;
+      text-transform: uppercase;
+      line-height: 1.5em;
+    }
+    .header {
+      text-align: center;
+      color: #261E1E;
+      text-align: center;
+      font-family:proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 20px;
+      font-weight:400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 1.5em;
+    }
+    .words {
+      text-align: center;
+      color: #261E1E;
+      text-align: center;
+      font-family:proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 20px;
+      font-weight:400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 1.5em;
+
+    }
+    .navbar {
+      text-align: center;
+      color: #261E1E;
+      text-align: center;
+      font-family:proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 20px;
+      font-weight:400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 1.5em;
+    }
+
+    
+  </style>
+{% include 'navbar.html' %}
+  <body class="container">
+    <center>
+      <h1 class="header">Oops!</h1>
+      <h2 class="header">
+        {{ request.user.username }}, your entry was invalid!
+      </h2>
+      <p>
+        <i class="words">
+          When you customize your <b><u>unique url path</u></b>, please make sure there are <b><u>no spaces</u></b>!
+        </i>
+      </p>
+      <br />
+      <p>
+        <i>
+          Also, make sure you have a <b><u>unique community title</u></b
+          >.
+        </i>
+      </p>
+      <br />
+      <br />
+      <a class="navbar" href="/createsubdjangit/">Try again</a>
+      <br />
+      <br />
+      <a class="navbar" href="/">Home</a>
+    </center>
+  </body>
 </html>
