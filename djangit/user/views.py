@@ -12,11 +12,10 @@ from djangit.comment.models import Comment
 
 @method_decorator(login_required, name='dispatch')
 class Homepage(View):
-    """View logged in user homepagethird argument in render() is the data we want to pass to the template"""
+    """View logged in user homepage"""
 
     def get(self, request):
         html = 'homepage.html'
-        # all user button
         all_users = DjangitUser.objects.all()
         active_user = request.user.djangituser
         currently_moderatoring = Subdjangit.objects.filter(
@@ -27,8 +26,10 @@ class Homepage(View):
         posts = Post.objects.filter(
             subdjangit__in=joined_subdjangits).order_by('-date_created')
 
-        data = {"all_users": all_users, "joined_subdjangits": joined_subdjangits,
-                "currently_moderatoring": currently_moderatoring, "posts": posts, }
+        data = {"all_users": all_users,
+                "joined_subdjangits": joined_subdjangits,
+                "currently_moderatoring": currently_moderatoring,
+                "posts": posts, }
         return render(request, html, data)
 
 

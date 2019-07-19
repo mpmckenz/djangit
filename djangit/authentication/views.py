@@ -11,6 +11,7 @@ from django.views import View
 
 
 class SignUp(View):
+    """Allows a user to signup for a djangit account"""
     html = 'signupform.html'
 
     def get(self, request):
@@ -47,6 +48,7 @@ class SignUp(View):
 
 
 class Login(View):
+    """Allows a djangit user to login to their account"""
     html = "loginform.html"
 
     def get(self, request):

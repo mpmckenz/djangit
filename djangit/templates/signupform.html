@@ -35,32 +35,29 @@
       margin-right: auto;
       width: 30%;
       background-color: #FBE8A6;
-  }
-  .title {
-    margin-top: 3%;
-    text-align: center;
-    font-family:proxima-nova, sans-serif !important;
-    font-style: normal;
-    font-size: 20px;
-    font-weight:400;
-    letter-spacing: 3px;
-    color:  #261E1E;
-    text-transform: uppercase;
-    line-height: 1.5em;
-  }
-
+    }
+    .title {
+      margin-top: 3%;
+      text-align: center;
+      font-family:proxima-nova, sans-serif !important;
+      font-style: normal;
+      font-size: 20px;
+      font-weight:400;
+      letter-spacing: 3px;
+      color:  #261E1E;
+      text-transform: uppercase;
+      line-height: 1.5em;
+    }
   </style>
-<h1 class="title">Signup</h1>
-<body class="container"></body>
-
-<form action="" method="post" class="form">
-  {%csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Submit" />
-</form>
-<br />
-<br />
-<!-- <a href="/login/" class="login">Login</a> -->
-
-</body>
+  
+  <h1 class="title">Signup</h1>
+  <body class="container"></body>
+    <form action="" method="post" class="form">
+      {%csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Submit" />
+    </form>
+    <br />
+    <br />
+  </body>
 </html>

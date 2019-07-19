@@ -9,8 +9,6 @@ class SignupForm(forms.Form):
 
 
 class LoginForm(forms.ModelForm):
-    class Meta: 
+    class Meta:
         model = DjangitUser
         fields = ["username", "password"]
-        # username = forms.CharField(max_length=50)
-        # password = forms.CharField(widget=forms.PasswordInput())
