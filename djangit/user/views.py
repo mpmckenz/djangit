@@ -10,6 +10,14 @@ from djangit.subdjangit.models import Subdjangit
 from djangit.comment.models import Comment
 
 
+def handler404(request, exception):
+    return render(request, '404.html', status=404)
+
+
+def handler500(request):
+    return render(request, '500.html', status=500)
+
+
 @method_decorator(login_required, name='dispatch')
 class Homepage(View):
     """View logged in user homepage"""
@@ -92,12 +100,3 @@ class DeleteComment(View):
         if moderator:
             Comment.objects.filter(id=cid).delete()
         return HttpResponseRedirect(reverse("commentonpost", args=(url, id)))
-
-
-class DeleteSubdjangit(View):
-    """Deletes subdjangit if logged in user is moderator"""
-
-    def delete(self, request, subdjangit):
-        subdjangit = Subdjangit.objects.filter(title=subdjangit)
-        subdjangit.delete()
-        return HttpResponseRedirect('/')

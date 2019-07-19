@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <style>
-    .comment {
-     
-      font-family: proxima-nova, sans-serif !important;
-      font-style: normal;
-      font-size: 14px;
-      font-weight:400;
-      letter-spacing: 3px;
-      color: #231f20;
-      text-transform: uppercase;
-      line-height: 1.5em;
-      margin:0 auto;
-    }
-    .container {
-  
-      text-align: center;
-      font-family: proxima-nova, sans-serif !important;
-      font-style: normal;
-      font-size: 14px;
-      font-weight:400;
-      letter-spacing: 3px;
-      color: #231f20;
-      text-transform: uppercase;
-      line-height: 1.5em;
-      margin:0 auto;
-    }
-    .form {
-     
-      color: #231f20;
-      font-family: proxima-nova, sans-serif !important;
-      font-style: normal;
-      font-size: 14px;
-      font-weight:400;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      line-height: 1.5em;
-      margin:0 auto;
-      background-color:#00ccff;
-    }
-  input:hover{
-	  cursor: pointer;
-}
-  button:hover{
-	  cursor: pointer;
-}
-.card {
-    /* display: block;
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    width: 20%;
-    border-radius: 10px;
-    padding: 2%;
-    background-color: #00ccff; */
+<style>
+  .comment {
+
+    font-family: proxima-nova, sans-serif !important;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #231f20;
+    text-transform: uppercase;
+    line-height: 1.5em;
+    margin: 0 auto;
+  }
+
+  .container {
+
+    text-align: center;
+    font-family: proxima-nova, sans-serif !important;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #231f20;
+    text-transform: uppercase;
+    line-height: 1.5em;
+    margin: 0 auto;
+  }
+
+  .form {
+
+    color: #231f20;
+    font-family: proxima-nova, sans-serif !important;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.5em;
+    margin: 0 auto;
+    background-color: #00ccff;
+  }
+
+  input:hover {
+    cursor: pointer;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
+  .card {
     display: block;
     font-family: proxima-nova, sans-serif !important;
     font-style: normal;
@@ -77,31 +75,32 @@
 
   .card:hover {
     box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.2);
-   
+
 
   }
-
-  </style>
+</style>
 {% include 'navbar.html' %}
-  {% include 'comment.html' %}
-  <br /> 
-  <br />
-  <br />
-  <body class="container">
-      <form action="" method="post" class="form">
-      <p class="comment">title: {{ post_to_comment_on.title }}</p>
-      <p class="comment">body: {{ post_to_comment_on.body }}</p>
-      <p class="comment">Community: <a href="/r/{{post_to_comment_on.url}}/">r/{{ post_to_comment_on.url }}</a></p>
-    </form>
+{% include 'comment.html' %}
+<br />
+<br />
+<br />
+
+<body class="container">
+  <form action="" method="post" class="form">
+    <p class="comment">title: {{ post_to_comment_on.title }}</p>
+    <p class="comment">user: {{ post_to_comment_on.user }}</p>
+    <p class="comment">body: {{ post_to_comment_on.body }}</p>
+    <p class="comment">Community: <a href="/r/{{post_to_comment_on.url}}/">r/{{ post_to_comment_on.url }}</a></p>
+  </form>
   {% for comment in comments %}
-    <div class="card">
-      <p class="comment">{{ comment.user }}'s Comment @ {{ comment.created_date }}</p>
-      <p class="comment">{{ comment.text }}</p>
-      <p class="comment">Total: {{ comment.vote_score }}</p>
-      <p class="comment">Upvotes: {{ comment.num_vote_up }}</p>
-      <p class="comment">Downvotes: {{ comment.num_vote_down }}</p>
-   
-  
+  <div class="card">
+    <p class="comment">{{ comment.user }}'s Comment @ {{ comment.created_date }}</p>
+    <p class="comment">{{ comment.text }}</p>
+    <p class="comment">Total: {{ comment.vote_score }}</p>
+    <p class="comment">Upvotes: {{ comment.num_vote_up }}</p>
+    <p class="comment">Downvotes: {{ comment.num_vote_down }}</p>
+
+
     <form method="post" action="/r/{{post_to_comment_on.url}}/post/{{post_to_comment_on.id}}/" style="display: inline">
       {% csrf_token %}
       <input type="hidden" value="upvote" name="upvote"></input>
@@ -114,11 +113,12 @@
       <input type="hidden" value="{{ comment.id }}" name="downvote"></input>
       <button type="submit" class="butt">Downvote</button>
     </form>
-    </div>
-    {% if post_to_comment_on in moderator %}
-    <a href="/deletecomment/{{ comment.id }}/{{ post_to_comment_on.url }}/{{ post_to_comment_on.id }}/" >delete</a>
-    {% endif %}
-    <br />
+  </div>
+  {% if post_to_comment_on in moderator %}
+  <a href="/deletecomment/{{ comment.id }}/{{ post_to_comment_on.url }}/{{ post_to_comment_on.id }}/">delete</a>
+  {% endif %}
+  <br />
   {% endfor %}
-  </body>
+</body>
+
 </html>

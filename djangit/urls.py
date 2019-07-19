@@ -15,10 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import handler404, handler500
 from djangit.user.urls import urlpatterns as user_urls
 from djangit.post.urls import urlpatterns as post_urls
 from djangit.authentication.urls import urlpatterns as authentication_urls
 from djangit.subdjangit.urls import urlpatterns as subdjangit_urls
+import djangit
+
+
+handler404 = djangit.authentication.views.handler404
+handler500 = djangit.authentication.views.handler500
+handler404 = djangit.post.views.handler404
+handler500 = djangit.post.views.handler500
+handler404 = djangit.subdjangit.views.handler404
+handler500 = djangit.subdjangit.views.handler500
+handler404 = djangit.user.views.handler404
+handler500 = djangit.user.views.handler500
 
 
 urlpatterns = [

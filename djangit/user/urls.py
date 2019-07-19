@@ -3,7 +3,7 @@ from django.contrib import admin
 from djangit.comment.views import Add_comment_to_post
 from djangit.user.views import (Homepage, ViewSpecificUserHomepage, AllUsers,
                                 ToggleSubscription, DeletePost,
-                                DeleteSubdjangit, DeleteComment)
+                                DeleteComment)
 from djangit.user.models import DjangitUser
 
 
