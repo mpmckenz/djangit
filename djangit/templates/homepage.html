@@ -2,19 +2,30 @@
 <html>
 <style>
   .container {
-    background-color: #f6f6f6;
+    
+
   }
     .header {
-      text-align: center;
-
+    text-align: center;
     color: #fc4445;
-    font-family: Georgia, sans-serif;
+    font-family: 'Leckerli One', cursive;
     font-style: normal;
     font-size: 40px;
     font-weight: 400;
     letter-spacing: 3px;
     text-transform: uppercase;
     line-height: 1.5em;
+    margin: 1em 0 0.5em 0;
+    
+   
+  }
+  .overlay{
+	width: auto;
+	height: 100%;
+	padding: 50px;
+	color: #FFF;
+	text-shadow: 1px 1px 1px #333;
+  background-image: linear-gradient( 135deg, #00ccff 10%, #fd5e086b 100%);
   }
 
   .card {
@@ -23,14 +34,18 @@
     transition: 0.3s;
     width: 20%;
     border-radius: 10px;
-    padding: 8%;
-    background-color: #97caef;
+    padding: 6%;
     display: block;
     margin-top: 3%;
     margin-left: auto;
     margin-right: auto;
     width: 40%;
-    border-color: #bc4123;
+    background: linear-gradient(#ffffff 50%, rgba(255,255,255,0) 0) 0 0,
+    radial-gradient(circle closest-side, #FFFFFF 53%, rgba(255,255,255,0) 0) 0 0,
+    radial-gradient(circle closest-side, #FFFFFF 50%, rgba(255,255,255,0) 0) 55px 0 #00ccff;
+    background-size: 110px 200px;
+    background-repeat: repeat-x;
+ 
   }
 
   .card:hover {
@@ -41,7 +56,7 @@
     text-align: center;
     font-family: proxima-nova, sans-serif !important;
     font-style: normal;
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 400;
     letter-spacing: 3px;
     color: #261e1e;
@@ -50,6 +65,7 @@
   }
 
   .footer {
+    margin-top: 4%;
     text-align: center;
     font-family: proxima-nova, sans-serif !important;
     font-style: normal;
@@ -65,7 +81,7 @@
     text-align: center;
     font-family: proxima-nova, sans-serif !important;
     font-style: normal;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 400;
     letter-spacing: 3px;
     color: #261e1e;
@@ -74,14 +90,13 @@
   }
 
   .username {
-    color: #fbe8a6;
     text-align: center;
     font-family: proxima-nova, sans-serif !important;
     font-style: normal;
-    font-size: 14px;
+    font-size: 22px;
     font-weight: 400;
     letter-spacing: 3px;
-    color: #261e1e;
+    color:#261e1e;
     text-transform: uppercase;
     line-height: 1.5em;
   }
@@ -93,13 +108,13 @@
 </script>
 
 <body class="container">
-  <header>
+  <header class="overlay">
     <p class="header">Welcome to Djangit</p>
   </header>
   {% include 'navbar.html' %}
   <hr />
   <div class="card">
-    <p class="words">Hello</p>
+    <p class="words">Welcome</p>
     <p class="username">{{ request.user.username }}</p>
     <p class="words">Joined Subdjangits:</p>
     {% for community in joined_subdjangits %}

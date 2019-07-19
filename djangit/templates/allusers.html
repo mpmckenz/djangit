@@ -1,7 +1,25 @@
-<div class="show_all_users">
+<!DOCTYPE html>
+<html>
+    <style>
+        .words {
+            text-align: center;
+            font-family: proxima-nova, sans-serif !important;
+            font-style: normal;
+            font-size: 20px;
+            font-weight:400;
+            letter-spacing: 3px;
+            color: #231f20;
+            text-transform: uppercase;
+            line-height: 1.5em;
+}
+    </style>
+
+
+<div class="words">
   {% for user in all_users %}
-  <a href="/user/{{ user.username }}/"> {{ user.username }} </a><br />
+  <p class="words"></p><a href="/user/{{ user.username }}/" class="words"> {{ user.username }} </a></p>
+  <br />
   {% endfor %}
 </div>
 </br>
-<a href='/'>Home</a>
+<a href='/' class="words">Home</a>

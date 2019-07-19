@@ -11,7 +11,15 @@
       color: #231f20;
       text-transform: uppercase;
       line-height: 1.5em;
-      background-color: #f6f6f6;
+      background:
+      radial-gradient(black 3px, transparent 4px),
+      radial-gradient(black 3px, transparent 4px),
+      linear-gradient(#fff 4px, transparent 0),
+      linear-gradient(45deg, transparent 74px, transparent 75px, #a4a4a4 75px, #a4a4a4 76px, transparent 77px, transparent 109px),
+      linear-gradient(-45deg, transparent 75px, transparent 76px, #a4a4a4 76px, #a4a4a4 77px, transparent 78px, transparent 109px),
+     #fff;
+      background-size: 109px 109px, 109px 109px,100% 6px, 109px 109px, 109px 109px;
+      background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
     }
 
     .form {
@@ -24,7 +32,7 @@
     margin-right: auto;
     width: 30%;
     text-align: left;
-    background-color: #97CAEF;
+    background-color: #00ccff;
   }
   .title {
     text-align: center;
@@ -39,13 +47,17 @@
     padding: 3%;
   }
 
+  input:hover{
+	cursor: pointer;
+}
+
   </style>
     {% include 'navbar.html' %}
 <body class="container">
   <form action="" method="post" class="form">
   <h1 class="title">Create a new community</h1>
-  {%csrf_token %}
-  {{ form.as_p }}
+    {%csrf_token %}
+    {{ form.as_p }}
   <input type="submit" value="Submit"  />
   </form>
 
