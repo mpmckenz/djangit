@@ -10,6 +10,14 @@ from django.http import HttpResponseRedirect
 from django.views import View
 
 
+def handler404(request):
+    return render(request, '404.html', status=404)
+
+
+def handler500(request):
+    return render(request, '500.html', status=500)
+
+
 class SignUp(View):
     """Allows a user to signup for a djangit account"""
     html = 'signupform.html'
@@ -27,7 +35,7 @@ class SignUp(View):
             if form.is_valid():
                 data = form.cleaned_data
                 if User.objects.filter(username=data['username']):
-                    return render(request, badSignup_username)
+                    return render(request, badsignup_username)
                 if User.objects.filter(email=data['email']):
                     return render(request, badsignup_email)
                 else:

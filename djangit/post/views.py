@@ -7,6 +7,14 @@ from djangit.comment.models import Comment
 from djangit.subdjangit.models import Subdjangit
 
 
+def handler404(request):
+    return render(request, '404.html', status=404)
+
+
+def handler500(request):
+    return render(request, '500.html', status=500)
+
+
 class CommentonPost(View):
     """Creates a post under to current Subdjangit Community"""
     form_class = CommentForm
@@ -17,7 +25,7 @@ class CommentonPost(View):
         post_to_comment_on = Post.objects.get(id=id)
 
         active_user = request.user.djangituser
-        moderator = Subdjangit.objects.all().filter(moderator=active_user)
+        moderator = Subdjangit.objects.filter(moderator=active_user)
 
         comments = Comment.objects.filter(post=post_to_comment_on)
         return render(request, html, {"form": form, "comments": comments, "post_to_comment_on": post_to_comment_on, "id": id, "moderator": moderator})
