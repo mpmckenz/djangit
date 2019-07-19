@@ -37,6 +37,7 @@
       text-transform: uppercase;
       line-height: 1.5em;
       margin:0 auto;
+      background-color:#00ccff;
     }
   input:hover{
 	  cursor: pointer;
@@ -44,6 +45,7 @@
   button:hover{
 	  cursor: pointer;
 }
+
   </style>
 {% include 'navbar.html' %}
   {% include 'comment.html' %}
@@ -59,23 +61,23 @@
   {% for comment in comments %}
     <p class="comment">{{ comment.user }}'s Comment @ {{ comment.created_date }}</p>
     <p class="comment">{{ comment.text }}</p>
-    <p>Total: {{ comment.vote_score }}</p>
-    <p>Upvotes: {{ comment.num_vote_up }}</p>
-    <p>Downvotes: {{ comment.num_vote_down }}</p>
-    <form method="post" action="/r/{{post_to_comment_on.url}}/post/{{post_to_comment_on.id}}/" style="display: inline">
+    <p class="comment">Total: {{ comment.vote_score }}</p>
+    <p class="comment">Upvotes: {{ comment.num_vote_up }}</p>
+    <p class="comment">Downvotes: {{ comment.num_vote_down }}</p>
+    <form method="post" class="form" action="/r/{{post_to_comment_on.url}}/post/{{post_to_comment_on.id}}/" style="display: inline">
       {% csrf_token %}
       <input type="hidden" value="upvote" name="upvote"></input>
       <input type="hidden" value="{{ comment.id }}" name="upvote"></input>
       <button type="submit" class="butt">Upvote</button>
     </form>
-    <form method="post" action="/r/{{post_to_comment_on.url}}/post/{{post_to_comment_on.id}}/" style="display: inline">
+    <form method="post" class="form" action="/r/{{post_to_comment_on.url}}/post/{{post_to_comment_on.id}}/" style="display: inline">
       {% csrf_token %}
       <input type="hidden" value="downvote" name="downvote"></input>
       <input type="hidden" value="{{ comment.id }}" name="downvote"></input>
       <button type="submit" class="butt">Downvote</button>
     </form>
     {% if post_to_comment_on in moderator %}
-    <a href="/deletecomment/{{ comment.id }}/{{ post_to_comment_on.url }}/{{ post_to_comment_on.id }}/">delete</a>
+    <a href="/deletecomment/{{ comment.id }}/{{ post_to_comment_on.url }}/{{ post_to_comment_on.id }}/" class="comment">delete</a>
     {% endif %}
     <br />
   {% endfor %}
